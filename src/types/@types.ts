@@ -6,6 +6,7 @@ export enum ELevels {
 
 export interface ICard {
   id: number;
+  value: number;
   image: string;
   visible: boolean;
   option: number;

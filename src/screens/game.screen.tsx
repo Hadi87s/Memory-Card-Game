@@ -28,16 +28,17 @@ const GameScreen = () => {
     if (invokedCard.length < 2) {
       console.log(invokedCard);
     } else {
-      if (invokedCard[0].id == invokedCard[1].id) {
+      const [firstCard, secondCard] = invokedCard;
+      if (firstCard.value == secondCard.value) {
         console.log("Math Found!");
-        updateCards(invokedCard[0], true);
-        updateCards(invokedCard[1], true);
+        updateCards(firstCard, true);
+        updateCards(secondCard, true);
         console.log(cards);
       } else {
         console.log("Not a Match");
         setTimeout(() => {
-          updateCards(invokedCard[0], false);
-          updateCards(invokedCard[1], false);
+          updateCards(firstCard, false);
+          updateCards(secondCard, false);
         }, 1000);
       }
       setTimeout(() => {

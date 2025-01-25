@@ -13,13 +13,15 @@ export const createGameBoard = (level: ELevels): ICard[] => {
       return {
         ...EMPTY_CARD,
         id: index,
+        value: index,
         option: index + 11,
         isFlipped: false,
       };
     else
       return {
         ...EMPTY_CARD,
-        id: index - 1,
+        id: index,
+        value: index - 1,
         option: index + 10,
         isFlipped: false,
       };
