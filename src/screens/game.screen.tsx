@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
-import card from "../components/card/card";
+
 import { createGameBoard } from "../utils/game.util";
 
 const GameScreen = () => {

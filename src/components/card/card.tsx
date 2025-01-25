@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./card.css";
 import { ICard } from "../../types/@types";
 
