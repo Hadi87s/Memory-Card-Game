@@ -1,5 +1,0 @@
-Components:
-- Login Screen
-- Levels Screen
-- Game Screen
-- Score Board
