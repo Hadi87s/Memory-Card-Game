@@ -7,7 +7,7 @@ import { createGameBoard } from "../utils/game.util";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
-  const [cards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
+  const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
 
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
@@ -17,30 +17,41 @@ const GameScreen = () => {
   };
 
   const updateCards = (clickedCard: ICard, check: boolean) => {
-    clickedCard.isFlipped = check;
-    clickedCard.visible = check;
-    cards.map((card) => {
-      return card.id == clickedCard.id ? clickedCard : card;
+    const updatedCards = cards.map((card) => {
+      return card.id == clickedCard.id
+        ? { ...card, isFlipped: check, visible: check }
+        : card;
     });
+    setCards(() => updatedCards);
   };
 
   useEffect(() => {
-    if (invokedCard.length < 2) {
-      console.log(invokedCard);
-    } else {
+    if (invokedCard.length === 2) {
       const [firstCard, secondCard] = invokedCard;
-      if (firstCard.value == secondCard.value) {
-        console.log("Math Found!");
-        updateCards(firstCard, true);
-        updateCards(secondCard, true);
-        console.log(cards);
+
+      if (firstCard.value === secondCard.value) {
+        console.log("Match Found!");
+        // Update both cards in a single state update
+        const updatedCards = cards.map((card) =>
+          card.id === firstCard.id || card.id === secondCard.id
+            ? { ...card, isFlipped: true, visible: true }
+            : card
+        );
+        setCards(updatedCards);
       } else {
         console.log("Not a Match");
+        // Flip both cards back after a delay in a single state update
         setTimeout(() => {
-          updateCards(firstCard, false);
-          updateCards(secondCard, false);
+          const updatedCards = cards.map((card) =>
+            card.id === firstCard.id || card.id === secondCard.id
+              ? { ...card, isFlipped: false, visible: false }
+              : card
+          );
+          setCards(updatedCards);
         }, 1000);
       }
+
+      // Reset the invokedCard array after a delay
       setTimeout(() => {
         setInvokedCard([]);
       }, 1000);
