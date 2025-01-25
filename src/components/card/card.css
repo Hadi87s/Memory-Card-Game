@@ -8,16 +8,16 @@
     justify-content: center;
     align-items: center;
     aspect-ratio: 1/1;
-    transition: 100ms ease-in;
     background-size: cover;
     background-position: center;
     transition: transform 300ms ease-in;
+    transition: all 150ms ease-in;
     position: relative;
 }
 
 .card:hover {
     border: 3px solid black;
-    box-shadow: inset 0 0 5px 2px rgb(53, 53, 53) ;
+    box-shadow: inset 0 0 5px 2px rgb(219, 219, 219) ;
 }
 
 .card.flip {
