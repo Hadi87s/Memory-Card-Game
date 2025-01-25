@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import "./App.css";
 import {
-  BrowserRouter,
   createBrowserRouter,
   RouteObject,
   RouterProvider,

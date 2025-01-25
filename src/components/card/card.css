@@ -1,0 +1,12 @@
+.card {
+    /* width: 80px; */
+    /* height: 80px; */
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    
+}
