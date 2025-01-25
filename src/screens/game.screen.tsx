@@ -5,7 +5,6 @@ import { ELevels, ICard } from "../types/@types";
 import card from "../components/card/card";
 import { createGameBoard } from "../utils/game.util";
 
-
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards, setCard] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));

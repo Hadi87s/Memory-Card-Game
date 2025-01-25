@@ -9,6 +9,8 @@
     align-items: center;
     aspect-ratio: 1/1;
     transition: 100ms ease-in;
+    background-size: cover;
+    background-position: center;
 }
 
 .card:hover {
