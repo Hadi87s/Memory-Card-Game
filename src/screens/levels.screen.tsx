@@ -1,7 +1,7 @@
 import React from "react";
 
 const LevelsScreen = () => {
-  return <div></div>;
+  return <div>Levels</div>;
 };
 
 export default LevelsScreen;
