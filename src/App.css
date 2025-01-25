@@ -55,7 +55,8 @@
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 10px;
-  max-width: 75vmin; /*This is good practice*/
+  max-width: 90vmin; /*This is good practice*/
+  height: 90vh;
   margin: 10px auto;
 }
 
