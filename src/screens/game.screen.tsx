@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
@@ -8,12 +8,14 @@ import { createGameBoard } from "../utils/game.util";
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-
+  const [isComparing, setIsComparing] = useState(false);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
   const handleOnClick = (clickedCard: ICard) => {
-    setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
-    updateCards(clickedCard, true);
+    if (!isComparing && invokedCard.length < 2) {
+      updateCards(clickedCard, true);
+      setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
+    }
   };
 
   const updateCards = (clickedCard: ICard, check: boolean) => {
@@ -27,11 +29,11 @@ const GameScreen = () => {
 
   useEffect(() => {
     if (invokedCard.length === 2) {
+      setIsComparing(true); // Disable further clicks
       const [firstCard, secondCard] = invokedCard;
 
       if (firstCard.value === secondCard.value) {
-        console.log("Match Found!");
-        // Update both cards in a single state update
+        // Keep the cards flipped
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
             ? { ...card, isFlipped: true, visible: true }
@@ -39,8 +41,7 @@ const GameScreen = () => {
         );
         setCards(updatedCards);
       } else {
-        console.log("Not a Match");
-        // Flip both cards back after a delay in a single state update
+        // Flip the cards back after a delay
         setTimeout(() => {
           const updatedCards = cards.map((card) =>
             card.id === firstCard.id || card.id === secondCard.id
@@ -51,9 +52,10 @@ const GameScreen = () => {
         }, 1000);
       }
 
-      // Reset the invokedCard array after a delay
+      // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
         setInvokedCard([]);
+        setIsComparing(false); // Re-enable clicks
       }, 1000);
     }
   }, [invokedCard]);

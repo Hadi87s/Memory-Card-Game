@@ -11,6 +11,11 @@
     transition: transform 300ms ease-in;
     transition: all 150ms ease-in;
     position: relative;
+    font-size: 100px;
+}
+
+.card.hideQM {
+    color: transparent;
 }
 
 .card:hover {

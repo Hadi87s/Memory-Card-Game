@@ -1,4 +1,10 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+body {
+  font-family: "Fredoka", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
 .placeholder {
   border: 1px solid #cdcdcd;
   display: flex;
