@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
@@ -8,20 +8,23 @@ import { createGameBoard } from "../utils/game.util";
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  const [visible, setVisible] = useState(false);
-  const [invokedCard, setInvokedCard] = useState<
-    React.MouseEvent<HTMLDivElement, MouseEvent>[]
-  >([]);
 
-  const handleOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (invokedCard.length < 2) {
-      setInvokedCard((prevInvoked) => [...prevInvoked, e]);
-      e.currentTarget.classList.add("flip");
-      setVisible(true);
-    } else {
-      console.log(invokedCard);
-    }
+  const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
+
+  const handleOnClick = (clickedCard: ICard) => {
+    setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
   };
+
+  useEffect(() => {
+    if (invokedCard.length < 2) {
+      console.log(invokedCard);
+    } else {
+      // console.log(invokedCard);
+      if (invokedCard[0].id == invokedCard[1].id) {
+        console.log("Match Found");
+      }
+    }
+  }, [invokedCard]);
   // I've deleted the setCards since its not used here yet.
   return (
     <div className="screen game-screen">
