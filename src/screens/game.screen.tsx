@@ -7,25 +7,45 @@ import { createGameBoard } from "../utils/game.util";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
-  const [cards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
+  const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
 
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
   const handleOnClick = (clickedCard: ICard) => {
     setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
+    updateCards(clickedCard, true);
+  };
+
+  const updateCards = (clickedCard: ICard, check: boolean) => {
+    clickedCard.isFlipped = check;
+    clickedCard.visible = check;
+    cards.map((card) => {
+      return card.id == clickedCard.id ? clickedCard : card;
+    });
   };
 
   useEffect(() => {
     if (invokedCard.length < 2) {
       console.log(invokedCard);
     } else {
-      // console.log(invokedCard);
       if (invokedCard[0].id == invokedCard[1].id) {
-        console.log("Match Found");
+        console.log("Math Found!");
+        updateCards(invokedCard[0], true);
+        updateCards(invokedCard[1], true);
+        console.log(cards);
+      } else {
+        console.log("Not a Match");
+        setTimeout(() => {
+          updateCards(invokedCard[0], false);
+          updateCards(invokedCard[1], false);
+        }, 1000);
       }
+      setTimeout(() => {
+        setInvokedCard([]);
+      }, 1000);
     }
   }, [invokedCard]);
-  // I've deleted the setCards since its not used here yet.
+
   return (
     <div className="screen game-screen">
       <div className="placeholder">Status</div>
