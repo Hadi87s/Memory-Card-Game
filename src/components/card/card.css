@@ -12,6 +12,7 @@
     transition: all 150ms ease-in;
     position: relative;
     font-size: 100px;
+    cursor: pointer;
 }
 
 .card.hideQM {
