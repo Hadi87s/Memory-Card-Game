@@ -7,17 +7,24 @@ import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 
 const GameScreen = () => {
-  const CURRENT_LEVEL = ELevels.EASY;
+  const CURRENT_LEVEL = ELevels.MEDIUM;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
+  const { username, score, setPlayerScore } = useContext(authContext);
+  const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
-  const { username, score, setPlayerScore } = useContext(authContext);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
-  const intervalID = useRef<number>(0);
+  const [tries, setTries] = useState<number>(0);
+
   const handleOnClick = (clickedCard: ICard) => {
-    if (!isComparing && !clickedCard.isFigured && invokedCard.length < 2) {
+    if (
+      !isComparing &&
+      !clickedCard.isFigured &&
+      !clickedCard.isRevealed &&
+      invokedCard.length < 2
+    ) {
       updateCards(clickedCard, true);
       setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
     }
@@ -26,7 +33,7 @@ const GameScreen = () => {
   const updateCards = (clickedCard: ICard, check: boolean) => {
     const updatedCards = cards.map((card) => {
       return card.id == clickedCard.id
-        ? { ...card, isFlipped: check, visible: check }
+        ? { ...card, isFlipped: check, visible: check, isRevealed: true }
         : card;
     });
     setCards(() => updatedCards);
@@ -53,6 +60,7 @@ const GameScreen = () => {
   useEffect(() => {
     if (invokedCard.length === 2) {
       setIsComparing(true); // Disable further clicks
+      setTries(tries + 1);
       const [firstCard, secondCard] = invokedCard;
 
       if (firstCard.value === secondCard.value) {
@@ -75,7 +83,7 @@ const GameScreen = () => {
         setTimeout(() => {
           const updatedCards = cards.map((card) =>
             card.id === firstCard.id || card.id === secondCard.id
-              ? { ...card, isFlipped: false, visible: false }
+              ? { ...card, isFlipped: false, visible: false, isRevealed: false } // Resetting the cards to the initial state
               : card
           );
           setCards(updatedCards);
@@ -104,6 +112,7 @@ const GameScreen = () => {
             {formatTime(elapsedTime)}
           </span>
         </div>
+        <div className="tries">Moves: {tries}</div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (

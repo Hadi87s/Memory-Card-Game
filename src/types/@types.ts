@@ -12,4 +12,5 @@ export interface ICard {
   option: number;
   isFlipped: boolean;
   isFigured: boolean;
+  isRevealed: boolean;
 }

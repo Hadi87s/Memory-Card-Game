@@ -17,6 +17,7 @@ export const createGameBoard = (level: ELevels): ICard[] => {
         option: index + 11,
         isFlipped: false,
         isFigured: false,
+        isRevealed: false,
       };
     else
       return {
@@ -26,6 +27,7 @@ export const createGameBoard = (level: ELevels): ICard[] => {
         option: index + 10,
         isFlipped: false,
         isFigured: false,
+        isRevealed: false,
       };
   }).sort(() => Math.random() - 0.5);
   return cards;
