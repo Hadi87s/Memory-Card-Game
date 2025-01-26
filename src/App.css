@@ -16,6 +16,15 @@ body {
 
 .status {
   color: gold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.status div {
+  padding: 10px;
+  
 }
 
 .game{

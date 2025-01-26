@@ -10,7 +10,7 @@ const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
-  const { username } = useContext(authContext);
+  const { username, score, setPlayerScore } = useContext(authContext);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
   const handleOnClick = (clickedCard: ICard) => {
@@ -36,7 +36,7 @@ const GameScreen = () => {
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
-
+        setPlayerScore();
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
             ? { ...card, isFlipped: true, visible: true, isFigured: true }
@@ -54,7 +54,6 @@ const GameScreen = () => {
           setCards(updatedCards);
         }, 1000);
       }
-
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
         setInvokedCard([]);
@@ -65,7 +64,10 @@ const GameScreen = () => {
 
   return (
     <div className="screen game-screen">
-      <div className="placeholder status">Welcome {username}!</div>
+      <div className="placeholder status">
+        <div className="username">Welcome {username}! </div>
+        <div className="score">Score: {score}</div>
+      </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (
           <Card key={index} card={card} passEvent={handleOnClick} />
