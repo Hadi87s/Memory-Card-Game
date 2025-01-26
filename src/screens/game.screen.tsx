@@ -9,10 +9,11 @@ const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
+  // const [isFigured, setIsFigured] = useState(false);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
   const handleOnClick = (clickedCard: ICard) => {
-    if (!isComparing && invokedCard.length < 2) {
+    if (!isComparing && !clickedCard.isFigured && invokedCard.length < 2) {
       updateCards(clickedCard, true);
       setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
     }
@@ -34,9 +35,10 @@ const GameScreen = () => {
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
+
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
-            ? { ...card, isFlipped: true, visible: true }
+            ? { ...card, isFlipped: true, visible: true, isFigured: true }
             : card
         );
         setCards(updatedCards);
