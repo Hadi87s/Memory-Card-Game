@@ -1,10 +1,10 @@
 import { Button, TextField } from "@mui/material";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
-  const [user, setUser] = useState<String>("");
+  const [_, setUser] = useState<String>("");
   const navigate = useNavigate();
   const handlePlayButton = () => {
     if (nameField.current) {
@@ -24,26 +24,23 @@ const LoginScreen = () => {
           InputProps={{
             style: { color: "white" }, // Text color set to white
           }}
-          InputLabelProps={{
-            style: { color: "white" }, // Label color set to white
-          }}
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "white", // Normal border color
               },
               "&:hover fieldset": {
-                borderColor: "yellow", // Border color when hovered
+                borderColor: "#cdcdcd", // Border color when hovered
               },
               "&.Mui-focused fieldset": {
-                borderColor: "yellow", // Border color when focused
+                borderColor: "gold", // Border color when focused
               },
             },
             "& .MuiInputLabel-root": {
               color: "white", // Label color
             },
             "& .MuiInputLabel-root.Mui-focused": {
-              color: "yellow", // Label color when focused
+              color: "gold", // Label color when focused
             },
           }}
         />
