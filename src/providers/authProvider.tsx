@@ -25,7 +25,7 @@ const AuthProvider = (props: IContext) => {
   };
 
   const setPlayerScore = () => {
-    setScore(score + 1);
+    setScore((oldScore) => oldScore + 1);
   };
 
   const value = {

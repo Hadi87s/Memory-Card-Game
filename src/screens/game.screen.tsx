@@ -8,10 +8,13 @@ import { authContext } from "../providers/authProvider";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
+  const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
   const { username, score, setPlayerScore } = useContext(authContext);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [isRunning, clearIsRunning] = useState<boolean>(false);
 
   const handleOnClick = (clickedCard: ICard) => {
     if (!isComparing && !clickedCard.isFigured && invokedCard.length < 2) {
@@ -29,6 +32,25 @@ const GameScreen = () => {
     setCards(() => updatedCards);
   };
 
+  const formatTime = (timeInSeconds: number) => {
+    const minutes = Math.floor(timeInSeconds / 60)
+      .toString()
+      .padStart(2, "0"); // Ensure 2 digits
+    const seconds = (timeInSeconds % 60).toString().padStart(2, "0"); // Ensure 2 digits
+    return `${minutes}:${seconds}`;
+  };
+
+  useEffect(() => {
+    let intervalID: number | undefined;
+    if (!isRunning) {
+      intervalID = setInterval(() => {
+        setElapsedTime((elapsed) => elapsed + 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalID);
+    }
+  }, [isRunning]);
+
   useEffect(() => {
     if (invokedCard.length === 2) {
       setIsComparing(true); // Disable further clicks
@@ -37,6 +59,12 @@ const GameScreen = () => {
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
         setPlayerScore();
+        console.log(score); // TODO: REMOVE AFTER DEBUGGING
+        console.log(MAX_SCORE); // TODO: REMOVE AFTER DEBUGGING
+
+        if (score + 1 == MAX_SCORE) {
+          clearIsRunning(true);
+        }
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
             ? { ...card, isFlipped: true, visible: true, isFigured: true }
@@ -65,8 +93,13 @@ const GameScreen = () => {
   return (
     <div className="screen game-screen">
       <div className="placeholder status">
-        <div className="username">Welcome {username}! </div>
+        <div className="username">
+          <span style={{ color: "white" }}>Welcome</span> {username}!{" "}
+        </div>
         <div className="score">Score: {score}</div>
+        <div className="elapsed-time">
+          Time spent: {formatTime(elapsedTime)}
+        </div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (
