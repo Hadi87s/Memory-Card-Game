@@ -66,8 +66,6 @@ const GameScreen = () => {
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
         setPlayerScore();
-        console.log(score); // TODO: REMOVE AFTER DEBUGGING
-        console.log(MAX_SCORE); // TODO: REMOVE AFTER DEBUGGING
 
         if (score + 1 == MAX_SCORE) {
           clearIfComplete(() => true);
@@ -101,7 +99,8 @@ const GameScreen = () => {
     <div className="screen game-screen">
       <div className="placeholder status">
         <div className="username">
-          <span style={{ color: "white" }}>Welcome </span> {username}!{" "}
+          <span style={{ color: "white" }}>Welcome </span>{" "}
+          {username ? username : "Unknown"}!{" "}
         </div>
         <div className="score">
           <span style={{ color: "white" }}>Score: </span> {score}

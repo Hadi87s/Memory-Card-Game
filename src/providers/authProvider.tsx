@@ -17,7 +17,7 @@ export const authContext = createContext<{
 });
 
 const AuthProvider = (props: IContext) => {
-  const [username, setUsername] = useState<string>("Unknown");
+  const [username, setUsername] = useState<string>("");
   const [score, setScore] = useState<number>(0);
 
   const setUserName = (name: string) => {
