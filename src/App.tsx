@@ -9,6 +9,7 @@ import GameScreen from "./screens/game.screen";
 import LevelsScreen from "./screens/levels.screen";
 import ScoreboardScreen from "./screens/score-board.screen";
 import NotFound from "./screens/not-found-screen";
+import AuthProvider from "./providers/authProvider";
 
 const routes: RouteObject[] = [
   {
@@ -34,7 +35,11 @@ const routes: RouteObject[] = [
 ];
 const browserRouter = createBrowserRouter(routes);
 function App() {
-  return <RouterProvider router={browserRouter}></RouterProvider>;
+  return (
+    <AuthProvider>
+      <RouterProvider router={browserRouter}></RouterProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;

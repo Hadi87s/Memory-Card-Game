@@ -1,14 +1,17 @@
 import { Button, TextField } from "@mui/material";
-import { useRef, useState } from "react";
+import { useContext, useRef } from "react"; // Adjust the import path as necessary
+import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
-  const [_, setUser] = useState<String>("");
   const navigate = useNavigate();
+  // const [_, setUser] = useState<String>("");
+  const { setUserName } = useContext(authContext);
+
   const handlePlayButton = () => {
     if (nameField.current) {
-      setUser(nameField.current.value);
+      setUserName(nameField.current.value);
       navigate("/game");
     }
   };

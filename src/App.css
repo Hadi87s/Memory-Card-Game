@@ -5,13 +5,17 @@ body {
   font-weight: 600;
   font-style: normal;
 }
+
 .placeholder {
-  border: 1px solid #cdcdcd;
+  border: 2px solid gold;
   display: flex;
   justify-content: center;
   padding: 1rem;
-  height: 40px;
   border-radius:12px;
+}
+
+.status {
+  color: gold;
 }
 
 .game{

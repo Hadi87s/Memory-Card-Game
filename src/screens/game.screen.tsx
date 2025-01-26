@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
 
 import { createGameBoard } from "../utils/game.util";
+import { authContext } from "../providers/authProvider";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
-  // const [isFigured, setIsFigured] = useState(false);
+  const { username } = useContext(authContext);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
 
   const handleOnClick = (clickedCard: ICard) => {
@@ -64,7 +65,7 @@ const GameScreen = () => {
 
   return (
     <div className="screen game-screen">
-      <div className="placeholder">Status</div>
+      <div className="placeholder status">Welcome {username}!</div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (
           <Card key={index} card={card} passEvent={handleOnClick} />

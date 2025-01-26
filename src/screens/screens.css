@@ -1,3 +1,7 @@
+.screen{
+    display: flex;
+}
+
 .login-form{
     display: flex;
     justify-self: center;
