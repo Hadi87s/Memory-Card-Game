@@ -1,5 +1,5 @@
 .card {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 6px;
     background-color: #f0f0f0;
     display: flex;
@@ -8,22 +8,54 @@
     aspect-ratio: 1/1;
     background-size: cover;
     background-position: center;
-    transition: transform 300ms ease-in;
-    transition: all 150ms ease-in;
+    transition: transform 250ms ease-in; /* Only one transition */
     position: relative;
     font-size: 100px;
     cursor: pointer;
-}
-
-.card.hideQM {
+    color: gold;
+    -webkit-text-stroke: 1px black;
+  }
+  
+  .card.hideQM {
     color: transparent;
-}
-
-.card:hover {
-    border: 3px solid black;
-    box-shadow: inset 0 0 5px 2px rgb(219, 219, 219) ;
-}
-
-.card.flip {
+    -webkit-text-stroke: 0 transparent;
+  }
+  
+  .card:hover {
+    border: 1px solid white;
+    box-shadow: inset 0 0 5px 2px rgb(219, 219, 219);
+  }
+  
+  .card.flip {
     transform: rotateY(180deg);
-}
+  }
+  
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides the back of the card */
+    transition: transform 250ms ease-in; /* Smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-front {
+    transform: rotateY(0deg);
+  }
+  
+  .card-back {
+    background-size: cover; /* Ensure the image fits */
+    transform: rotateY(180deg); /* Initially hidden */
+    border-radius:6px;
+  }
+  
+  .card.flip .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .card.flip .card-back {
+    transform: rotateY(0deg);
+  }
