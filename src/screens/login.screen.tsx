@@ -24,24 +24,8 @@ const LoginScreen = () => {
           InputProps={{
             style: { color: "white" }, // Text color set to white
           }}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "white", // Normal border color
-              },
-              "&:hover fieldset": {
-                borderColor: "#cdcdcd", // Border color when hovered
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "gold", // Border color when focused
-              },
-            },
-            "& .MuiInputLabel-root": {
-              color: "white", // Label color
-            },
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "gold", // Label color when focused
-            },
+          InputLabelProps={{
+            style: { color: "white" }, // Label color set to white
           }}
         />
         <Button
