@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
@@ -7,15 +7,15 @@ import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 
 const GameScreen = () => {
-  const CURRENT_LEVEL = ELevels.MEDIUM;
+  const CURRENT_LEVEL = ELevels.EASY;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const [isComparing, setIsComparing] = useState(false);
   const { username, score, setPlayerScore } = useContext(authContext);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
-  const [isRunning, clearIsRunning] = useState<boolean>(false);
-
+  const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
+  const intervalID = useRef<number>(0);
   const handleOnClick = (clickedCard: ICard) => {
     if (!isComparing && !clickedCard.isFigured && invokedCard.length < 2) {
       updateCards(clickedCard, true);
@@ -41,15 +41,14 @@ const GameScreen = () => {
   };
 
   useEffect(() => {
-    let intervalID: number | undefined;
-    if (!isRunning) {
-      intervalID = setInterval(() => {
+    if (!isPuzzleComplete) {
+      intervalID.current = setInterval(() => {
         setElapsedTime((elapsed) => elapsed + 1);
       }, 1000);
     } else {
-      clearInterval(intervalID);
+      clearInterval(intervalID.current);
     }
-  }, [isRunning]);
+  }, [isPuzzleComplete]);
 
   useEffect(() => {
     if (invokedCard.length === 2) {
@@ -63,7 +62,7 @@ const GameScreen = () => {
         console.log(MAX_SCORE); // TODO: REMOVE AFTER DEBUGGING
 
         if (score + 1 == MAX_SCORE) {
-          clearIsRunning(true);
+          clearIfComplete(() => true);
         }
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
@@ -94,11 +93,16 @@ const GameScreen = () => {
     <div className="screen game-screen">
       <div className="placeholder status">
         <div className="username">
-          <span style={{ color: "white" }}>Welcome</span> {username}!{" "}
+          <span style={{ color: "white" }}>Welcome </span> {username}!{" "}
         </div>
-        <div className="score">Score: {score}</div>
+        <div className="score">
+          <span style={{ color: "white" }}>Score: </span> {score}
+        </div>
         <div className="elapsed-time">
-          Time spent: {formatTime(elapsedTime)}
+          <span style={{ color: "white" }}>Time Spent: </span>{" "}
+          <span style={{ color: isPuzzleComplete ? "green" : "gold" }}>
+            {formatTime(elapsedTime)}
+          </span>
         </div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
