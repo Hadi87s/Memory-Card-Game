@@ -31,7 +31,7 @@ const GameScreen = () => {
       gameState.invokedCard.length < 2
     ) {
       updateCards(clickedCard, true);
-      dispatch({ type: "INVOKED_CARDS", payload: [clickedCard] });
+      dispatch({ type: "INVOKED_CARDS", payload: clickedCard });
     }
   };
 
@@ -95,7 +95,7 @@ const GameScreen = () => {
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
-        dispatch({ type: "INVOKED_CARDS", payload: [] }); // TODO: This should work just fine and invoke cards as usual
+        dispatch({ type: "INVOKED_CARDS", payload: null }); // TODO: This should work just fine and invoke cards as usual
         dispatch({ type: "COMPARE_CARDS", payload: false });
       }, 1000);
     }

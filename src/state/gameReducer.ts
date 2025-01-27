@@ -9,10 +9,10 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, isComparing: action.payload };
     }
     case "INVOKED_CARDS": {
-      if (action.payload.length) {
+      if (action.payload) {
         return {
           ...state,
-          invokedCard: [...state.invokedCard, ...action.payload],
+          invokedCard: [...state.invokedCard, action.payload],
         };
       } else {
         return { ...state, invokedCard: [] };
