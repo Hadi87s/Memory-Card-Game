@@ -13,17 +13,6 @@ const GameScreen = () => {
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
 
-  // const [gameState, dispatch] = useReducer(gameReducer, {
-  //   cards: [],
-  //   isComparing: false,
-  //   invokedCard: [],
-  //   elapsedTime: 0,
-  //   isPuzzleComplete: false,
-  //   moves: 0,
-  //   username: "",
-  //   score: 0,
-  // });
-
   const handleOnClick = (clickedCard: ICard) => {
     if (
       !gameState.isComparing &&
@@ -71,7 +60,6 @@ const GameScreen = () => {
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
-        // setPlayerScore();
         dispatch({ type: "USER_SCORE" });
 
         if (gameState.score + 1 == MAX_SCORE) {

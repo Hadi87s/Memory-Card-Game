@@ -15,7 +15,6 @@ export interface ICard {
 }
 
 export interface GameState {
-  cards: ICard[];
   isComparing: boolean;
   invokedCard: ICard[];
   elapsedTime: number;
@@ -26,7 +25,6 @@ export interface GameState {
 }
 
 export type GameAction =
-  | { type: "UPDATE_CARDS"; payload: ICard[] }
   | { type: "COMPARE_CARDS"; payload: boolean }
   | { type: "INVOKED_CARDS"; payload: ICard | null }
   | { type: "INCREMENT_TIME"; payload: number }

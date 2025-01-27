@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useReducer, useState } from "react";
+import { createContext, Dispatch, useReducer } from "react";
 import gameReducer from "../state/gameReducer";
 import { GameAction, GameState } from "../types/@types";
 
@@ -25,16 +25,6 @@ export const authContext = createContext<{
 });
 
 const AuthProvider = (props: IContext) => {
-  // const [username, setUsername] = useState<string>("");
-  // const [score, setScore] = useState<number>(0);
-
-  // const setUserName = (name: string) => {
-  //   setUsername(name);
-  // };
-
-  // const setPlayerScore = () => {
-  //   setScore((oldScore) => oldScore + 1);
-  // };
   const [gameState, dispatch] = useReducer(gameReducer, INITIAL_STATE_VALUE);
 
   const value = {
