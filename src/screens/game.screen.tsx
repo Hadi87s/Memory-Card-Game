@@ -1,27 +1,28 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
 
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
-import gameReducer from "../state/gameReducer";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
-  const { username, score, setPlayerScore } = useContext(authContext);
+  const { gameState, dispatch } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
 
-  const [gameState, dispatch] = useReducer(gameReducer, {
-    cards: [],
-    isComparing: false,
-    invokedCard: [],
-    elapsedTime: 0,
-    isPuzzleComplete: false,
-    moves: 0,
-  });
+  // const [gameState, dispatch] = useReducer(gameReducer, {
+  //   cards: [],
+  //   isComparing: false,
+  //   invokedCard: [],
+  //   elapsedTime: 0,
+  //   isPuzzleComplete: false,
+  //   moves: 0,
+  //   username: "",
+  //   score: 0,
+  // });
 
   const handleOnClick = (clickedCard: ICard) => {
     if (
@@ -58,7 +59,6 @@ const GameScreen = () => {
         dispatch({ type: "INCREMENT_TIME", payload: 1 });
       }, 1000);
     } else {
-      
       clearInterval(intervalID.current);
     }
   }, [gameState.isPuzzleComplete]);
@@ -71,9 +71,10 @@ const GameScreen = () => {
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
-        setPlayerScore();
+        // setPlayerScore();
+        dispatch({ type: "USER_SCORE" });
 
-        if (score + 1 == MAX_SCORE) {
+        if (gameState.score + 1 == MAX_SCORE) {
           dispatch({ type: "COMPLETE_PUZZLE", payload: true });
         }
         const updatedCards = cards.map((card) =>
@@ -106,10 +107,10 @@ const GameScreen = () => {
       <div className="placeholder status">
         <div className="username">
           <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
-          {username ? username : "Unknown"}!{" "}
+          {gameState.username ? gameState.username : "Unknown"}!{" "}
         </div>
         <div className="score">
-          <span style={{ color: "#1976d2" }}>Score: </span> {score}
+          <span style={{ color: "#1976d2" }}>Score: </span> {gameState.score}
         </div>
         <div className="elapsed-time">
           <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}

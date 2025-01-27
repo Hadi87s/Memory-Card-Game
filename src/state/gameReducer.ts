@@ -27,6 +27,12 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "INCREMENT_TRIES": {
       return { ...state, moves: state.moves + 1 };
     }
+    case "USER_LOGIN": {
+      return { ...state, username: action.payload };
+    }
+    case "USER_SCORE": {
+      return { ...state, score: state.score + 1 };
+    }
     default:
       return state;
   }

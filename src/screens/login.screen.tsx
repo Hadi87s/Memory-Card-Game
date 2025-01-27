@@ -18,11 +18,12 @@ const LoginScreen = () => {
   const level = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const { setUserName } = useContext(authContext);
+  const { dispatch } = useContext(authContext);
 
   const handlePlayButton = () => {
     if (nameField.current && level.current) {
-      setUserName(nameField.current.value);
+      // setUserName(nameField.current.value);
+      dispatch({ type: "USER_LOGIN", payload: nameField.current.value }); // setting the username on login
       navigate("/game");
     }
   };

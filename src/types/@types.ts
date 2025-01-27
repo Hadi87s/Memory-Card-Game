@@ -21,6 +21,8 @@ export interface GameState {
   elapsedTime: number;
   isPuzzleComplete: boolean;
   moves: number;
+  username: string;
+  score: number;
 }
 
 export type GameAction =
@@ -29,4 +31,6 @@ export type GameAction =
   | { type: "INVOKED_CARDS"; payload: ICard | null }
   | { type: "INCREMENT_TIME"; payload: number }
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
-  | { type: "INCREMENT_TRIES"; payload?: number };
+  | { type: "INCREMENT_TRIES"; payload?: number }
+  | { type: "USER_LOGIN"; payload: string }
+  | { type: "USER_SCORE"; payload?: number };
