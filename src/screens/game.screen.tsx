@@ -8,13 +8,12 @@ import { authContext } from "../providers/authProvider";
 import gameReducer from "../state/gameReducer";
 
 const GameScreen = () => {
-  const CURRENT_LEVEL = ELevels.MEDIUM;
+  const CURRENT_LEVEL = ELevels.EASY;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  // const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  // const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
   const [moves, setMoves] = useState<number>(0);
 
@@ -36,7 +35,7 @@ const GameScreen = () => {
     ) {
       updateCards(clickedCard, true);
       // setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
-      dispatch({type:"INVOKED_CARDS", payload:[clickedCard]});
+      dispatch({ type: "INVOKED_CARDS", payload: [clickedCard] });
     }
   };
 
@@ -65,7 +64,8 @@ const GameScreen = () => {
   useEffect(() => {
     if (!isPuzzleComplete) {
       intervalID.current = setInterval(() => {
-        setElapsedTime((elapsed) => elapsed + 1);
+        // setElapsedTime((elapsed) => elapsed + 1);
+        dispatch({ type: "INCREMENT_TIME" });
       }, 1000);
     } else {
       clearInterval(intervalID.current);
@@ -108,7 +108,7 @@ const GameScreen = () => {
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
         // setInvokedCard([]);
-        dispatch({type:"INVOKED_CARDS", payload:[]}); // TODO: This should work just fine and invoke cards as usual
+        dispatch({ type: "INVOKED_CARDS", payload: [] }); // TODO: This should work just fine and invoke cards as usual
 
         //setIsComparing(false); // Re-enable clicks
         dispatch({ type: "COMPARE_CARDS", payload: false });
@@ -129,7 +129,7 @@ const GameScreen = () => {
         <div className="elapsed-time">
           <span style={{ color: "white" }}>Time Spent: </span>{" "}
           <span style={{ color: isPuzzleComplete ? "green" : "gold" }}>
-            {formatTime(elapsedTime)}
+            {formatTime(gameState.elapsedTime)}
           </span>
         </div>
         <div className="tries">Moves: {moves}</div>
