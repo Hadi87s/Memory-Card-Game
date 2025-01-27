@@ -15,12 +15,16 @@ import { ELevels } from "../types/@types";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
+  const level = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  // const [_, setUser] = useState<String>("");
+
   const { setUserName } = useContext(authContext);
 
-  const handlePlayButton = () => {
-    if (nameField.current) {
+  const handlePlayButton = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (nameField.current && level.current) {
       setUserName(nameField.current.value);
       navigate("/game");
     }
@@ -50,6 +54,7 @@ const LoginScreen = () => {
             value={age}
             label="Age"
             onChange={handleChange}
+            inputRef={level}
           >
             <MenuItem value={ELevels.EASY}>Easy</MenuItem>
             <MenuItem value={ELevels.MEDIUM}>Medium</MenuItem>

@@ -7,7 +7,7 @@ body {
 }
 
 .placeholder {
-  border: 2px solid gold;
+  border: 2px solid#1976d2;
   display: flex;
   justify-content: center;
   padding: 1rem;
