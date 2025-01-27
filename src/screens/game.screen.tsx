@@ -13,8 +13,7 @@ const GameScreen = () => {
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  const [moves, setMoves] = useState<number>(0);
-  // const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
+  // const [moves, setMoves] = useState<number>(0);
 
   const [gameState, dispatch] = useReducer(gameReducer, {
     cards: [],
@@ -22,7 +21,7 @@ const GameScreen = () => {
     invokedCard: [],
     elapsedTime: 0,
     isPuzzleComplete: false,
-    tries: 0,
+    moves: 0,
   });
 
   const handleOnClick = (clickedCard: ICard) => {
@@ -49,8 +48,8 @@ const GameScreen = () => {
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60)
       .toString()
-      .padStart(2, "0"); // Ensure 2 digits
-    const seconds = (timeInSeconds % 60).toString().padStart(2, "0"); // Ensure 2 digits
+      .padStart(2, "0");
+    const seconds = (timeInSeconds % 60).toString().padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
 
@@ -68,7 +67,8 @@ const GameScreen = () => {
     if (gameState.invokedCard.length === 2) {
       //setIsComparing(true); // Disable further clicks
       dispatch({ type: "COMPARE_CARDS", payload: true });
-      setMoves(moves + 1);
+      // setMoves(moves + 1);
+      dispatch({ type: "INCREMENT_TRIES" });
       const [firstCard, secondCard] = gameState.invokedCard;
 
       if (firstCard.value === secondCard.value) {
@@ -76,7 +76,6 @@ const GameScreen = () => {
         setPlayerScore();
 
         if (score + 1 == MAX_SCORE) {
-          // clearIfComplete(() => true);
           dispatch({ type: "COMPLETE_PUZZLE", payload: true });
         }
         const updatedCards = cards.map((card) =>
@@ -85,7 +84,6 @@ const GameScreen = () => {
             : card
         );
         setCards(updatedCards);
-        // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
       } else {
         // Flip the cards back after a delay
         setTimeout(() => {
@@ -95,15 +93,11 @@ const GameScreen = () => {
               : card
           );
           setCards(updatedCards);
-          // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
         }, 1000);
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
-        // setInvokedCard([]);
         dispatch({ type: "INVOKED_CARDS", payload: [] }); // TODO: This should work just fine and invoke cards as usual
-
-        //setIsComparing(false); // Re-enable clicks
         dispatch({ type: "COMPARE_CARDS", payload: false });
       }, 1000);
     }
@@ -127,7 +121,7 @@ const GameScreen = () => {
             {formatTime(gameState.elapsedTime)}
           </span>
         </div>
-        <div className="tries">Moves: {moves}</div>
+        <div className="tries">Moves: {gameState.moves}</div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (

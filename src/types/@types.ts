@@ -21,7 +21,7 @@ export interface GameState {
   invokedCard: ICard[];
   elapsedTime: number;
   isPuzzleComplete: boolean;
-  tries: number;
+  moves: number;
 }
 
 export type GameAction =
@@ -30,4 +30,4 @@ export type GameAction =
   | { type: "INVOKED_CARDS"; payload: ICard[] }
   | { type: "INCREMENT_TIME"; payload?: number }
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
-  | { type: "INCREMENT_TRIES"; payload: number };
+  | { type: "INCREMENT_TRIES"; payload?: number };

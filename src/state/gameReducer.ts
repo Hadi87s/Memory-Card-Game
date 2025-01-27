@@ -24,6 +24,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "COMPLETE_PUZZLE": {
       return { ...state, isPuzzleComplete: action.payload };
     }
+    case "INCREMENT_TRIES": {
+      return { ...state, moves: state.moves + 1 };
+    }
     default:
       return state;
   }
