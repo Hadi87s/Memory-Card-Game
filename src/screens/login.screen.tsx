@@ -20,10 +20,7 @@ const LoginScreen = () => {
 
   const { setUserName } = useContext(authContext);
 
-  const handlePlayButton = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+  const handlePlayButton = () => {
     if (nameField.current && level.current) {
       setUserName(nameField.current.value);
       navigate("/game");
