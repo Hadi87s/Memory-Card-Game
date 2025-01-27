@@ -16,7 +16,7 @@ const GameScreen = () => {
   // const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
-  const [tries, setTries] = useState<number>(0);
+  const [moves, setMoves] = useState<number>(0);
 
   const [gameState, dispatch] = useReducer(gameReducer, {
     cards: [],
@@ -76,7 +76,7 @@ const GameScreen = () => {
     if (gameState.invokedCard.length === 2) {
       //setIsComparing(true); // Disable further clicks
       dispatch({ type: "COMPARE_CARDS", payload: true });
-      setTries(tries + 1);
+      setMoves(moves + 1);
       const [firstCard, secondCard] = gameState.invokedCard;
 
       if (firstCard.value === secondCard.value) {
@@ -132,7 +132,7 @@ const GameScreen = () => {
             {formatTime(elapsedTime)}
           </span>
         </div>
-        <div className="tries">Moves: {tries}</div>
+        <div className="tries">Moves: {moves}</div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
         {cards.map((card, index) => (
