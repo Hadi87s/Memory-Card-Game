@@ -13,7 +13,6 @@ const GameScreen = () => {
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  // const [moves, setMoves] = useState<number>(0);
 
   const [gameState, dispatch] = useReducer(gameReducer, {
     cards: [],
@@ -65,9 +64,7 @@ const GameScreen = () => {
 
   useEffect(() => {
     if (gameState.invokedCard.length === 2) {
-      //setIsComparing(true); // Disable further clicks
       dispatch({ type: "COMPARE_CARDS", payload: true });
-      // setMoves(moves + 1);
       dispatch({ type: "INCREMENT_TRIES" });
       const [firstCard, secondCard] = gameState.invokedCard;
 
