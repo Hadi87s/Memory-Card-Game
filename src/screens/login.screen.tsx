@@ -44,12 +44,12 @@ const LoginScreen = () => {
           variant="outlined"
         />
         <FormControl fullWidth className="custom-mui-dropdown">
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-label">Level</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={age}
-            label="Age"
+            label="Label"
             onChange={handleChange}
             inputRef={level}
           >
