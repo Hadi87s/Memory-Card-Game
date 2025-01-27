@@ -16,3 +16,17 @@
 .login-form .custom-mui-dropdown{
     margin-bottom: 10px;
 }
+
+@media (max-width:859px) {
+    .screen{
+        display: block;
+    }
+    .status{
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: initial;
+        width: 90vmin;
+        margin:0  auto;
+    }
+}
+
