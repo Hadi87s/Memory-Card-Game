@@ -21,6 +21,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "INCREMENT_TIME": {
       return { ...state, elapsedTime: state.elapsedTime + 1 };
     }
+    case "COMPLETE_PUZZLE": {
+      return { ...state, isPuzzleComplete: action.payload };
+    }
     default:
       return state;
   }

@@ -13,9 +13,8 @@ const GameScreen = () => {
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  // const [elapsedTime, setElapsedTime] = useState<number>(0);
-  const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
   const [moves, setMoves] = useState<number>(0);
+  // const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
 
   const [gameState, dispatch] = useReducer(gameReducer, {
     cards: [],
@@ -34,7 +33,6 @@ const GameScreen = () => {
       gameState.invokedCard.length < 2
     ) {
       updateCards(clickedCard, true);
-      // setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
       dispatch({ type: "INVOKED_CARDS", payload: [clickedCard] });
     }
   };
@@ -46,7 +44,6 @@ const GameScreen = () => {
         : card;
     });
     setCards(() => updatedCards);
-    // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
   };
 
   const formatTime = (timeInSeconds: number) => {
@@ -57,20 +54,15 @@ const GameScreen = () => {
     return `${minutes}:${seconds}`;
   };
 
-  // useEffect(() => {
-  //   dispatch({ type: "UPDATE_CARDS", payload: createGameBoard(CURRENT_LEVEL) });
-  // });
-
   useEffect(() => {
-    if (!isPuzzleComplete) {
+    if (!gameState.isPuzzleComplete) {
       intervalID.current = setInterval(() => {
-        // setElapsedTime((elapsed) => elapsed + 1);
         dispatch({ type: "INCREMENT_TIME" });
       }, 1000);
     } else {
       clearInterval(intervalID.current);
     }
-  }, [isPuzzleComplete]);
+  }, [gameState.isPuzzleComplete]);
 
   useEffect(() => {
     if (gameState.invokedCard.length === 2) {
@@ -84,7 +76,8 @@ const GameScreen = () => {
         setPlayerScore();
 
         if (score + 1 == MAX_SCORE) {
-          clearIfComplete(() => true);
+          // clearIfComplete(() => true);
+          dispatch({ type: "COMPLETE_PUZZLE", payload: true });
         }
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
@@ -128,7 +121,9 @@ const GameScreen = () => {
         </div>
         <div className="elapsed-time">
           <span style={{ color: "white" }}>Time Spent: </span>{" "}
-          <span style={{ color: isPuzzleComplete ? "green" : "gold" }}>
+          <span
+            style={{ color: gameState.isPuzzleComplete ? "green" : "gold" }}
+          >
             {formatTime(gameState.elapsedTime)}
           </span>
         </div>
