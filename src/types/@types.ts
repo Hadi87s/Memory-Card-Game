@@ -9,7 +9,6 @@ export interface ICard {
   value: number;
   image: string;
   visible: boolean;
-  option: number;
   isFlipped: boolean;
   isFigured: boolean;
   isRevealed: boolean;

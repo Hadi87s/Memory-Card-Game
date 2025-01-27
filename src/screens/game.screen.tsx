@@ -8,7 +8,7 @@ import { authContext } from "../providers/authProvider";
 import gameReducer from "../state/gameReducer";
 
 const GameScreen = () => {
-  const CURRENT_LEVEL = ELevels.EASY;
+  const CURRENT_LEVEL = ELevels.MEDIUM;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
