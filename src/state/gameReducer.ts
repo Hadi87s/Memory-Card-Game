@@ -1,26 +1,16 @@
-import { ICard } from "../types/@types";
+import { GameAction, GameState } from "../types/@types";
 
-interface GameState {
-  cards: ICard[];
-  isComparing: boolean;
-  isInvoked: ICard[];
-  elapsedTime: number;
-  isPuzzleComplete: boolean;
-  tries: number;
-}
-
-type GameAction =
-  | { type: "CLICK_CARD", payload: ICard }
-  | { type: "COMPARE_CARDS", payload: boolean }
-  | { type: "RESET_CARDS", payload: ICard }
-  | { type: "INCREMENT_TIME", payload: number }
-  | { type: "COMPLETE_PUZZLE", payload: boolean }
-  | { type: "INCREMENT_TRIES", payload: number };
-
-function gameReducer(state: GameState, Action: GameAction): any {
-    switch(Action.type) {
-        case "CLICK_CARD":{
-            return {...state};
-        }
+function gameReducer(state: GameState, action: GameAction): GameState {
+  switch (action.type) {
+    case "UPDATE_CARDS": {
+      return { ...state, cards: action.payload }; // TODO: this format is important (return the whole states but override the cards list only)
     }
+    case "COMPARE_CARDS": {
+      return { ...state, isComparing: action.payload };
+    }
+    default:
+      return state;
+  }
 }
+
+export default gameReducer;

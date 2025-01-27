@@ -14,3 +14,21 @@ export interface ICard {
   isFigured: boolean;
   isRevealed: boolean;
 }
+
+export interface GameState {
+  cards: ICard[];
+  isComparing: boolean;
+  isInvoked: ICard[];
+  elapsedTime: number;
+  isPuzzleComplete: boolean;
+  tries: number;
+}
+
+export type GameAction =
+  | { type: "UPDATE_CARDS"; payload: ICard[] }
+  | { type: "CLICK_CARD"; payload: ICard[] }
+  | { type: "COMPARE_CARDS"; payload: boolean }
+  | { type: "RESET_CARDS"; payload: ICard }
+  | { type: "INCREMENT_TIME"; payload: number }
+  | { type: "COMPLETE_PUZZLE"; payload: boolean }
+  | { type: "INCREMENT_TRIES"; payload: number };

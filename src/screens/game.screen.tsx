@@ -1,10 +1,11 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
 
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
+import gameReducer from "../state/gameReducer";
 
 const GameScreen = () => {
   const CURRENT_LEVEL = ELevels.MEDIUM;
@@ -12,15 +13,24 @@ const GameScreen = () => {
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  const [isComparing, setIsComparing] = useState(false);
+  // const [isComparing, setIsComparing] = useState(false);
   const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
   const [tries, setTries] = useState<number>(0);
 
+  const [gameState, dispatch] = useReducer(gameReducer, {
+    cards: [],
+    isComparing: false,
+    isInvoked: [],
+    elapsedTime: 0,
+    isPuzzleComplete: false,
+    tries: 0,
+  });
+
   const handleOnClick = (clickedCard: ICard) => {
     if (
-      !isComparing &&
+      !gameState.isComparing &&
       !clickedCard.isFigured &&
       !clickedCard.isRevealed &&
       invokedCard.length < 2
@@ -37,6 +47,7 @@ const GameScreen = () => {
         : card;
     });
     setCards(() => updatedCards);
+    // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
   };
 
   const formatTime = (timeInSeconds: number) => {
@@ -46,6 +57,10 @@ const GameScreen = () => {
     const seconds = (timeInSeconds % 60).toString().padStart(2, "0"); // Ensure 2 digits
     return `${minutes}:${seconds}`;
   };
+
+  // useEffect(() => {
+  //   dispatch({ type: "UPDATE_CARDS", payload: createGameBoard(CURRENT_LEVEL) });
+  // });
 
   useEffect(() => {
     if (!isPuzzleComplete) {
@@ -59,7 +74,8 @@ const GameScreen = () => {
 
   useEffect(() => {
     if (invokedCard.length === 2) {
-      setIsComparing(true); // Disable further clicks
+      //setIsComparing(true); // Disable further clicks
+      dispatch({ type: "COMPARE_CARDS", payload: true });
       setTries(tries + 1);
       const [firstCard, secondCard] = invokedCard;
 
@@ -76,6 +92,7 @@ const GameScreen = () => {
             : card
         );
         setCards(updatedCards);
+        // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
       } else {
         // Flip the cards back after a delay
         setTimeout(() => {
@@ -85,12 +102,14 @@ const GameScreen = () => {
               : card
           );
           setCards(updatedCards);
+          // dispatch({ type: "UPDATE_CARDS", payload: updatedCards });
         }, 1000);
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
         setInvokedCard([]);
-        setIsComparing(false); // Re-enable clicks
+        //setIsComparing(false); // Re-enable clicks
+        dispatch({ type: "COMPARE_CARDS", payload: false });
       }, 1000);
     }
   }, [invokedCard]);
