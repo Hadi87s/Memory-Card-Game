@@ -28,6 +28,7 @@
   
   .card.flip {
     transform: rotateY(180deg);
+    transition: transform 250ms ease-in;
   }
   
   .card-front,

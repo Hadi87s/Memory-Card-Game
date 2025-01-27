@@ -6,7 +6,7 @@ interface IContext {
   children: React.ReactNode;
 }
 
-const INITIAL_STATE_VALUE = {
+const INITIAL_STATE = {
   cards: [],
   isComparing: false,
   invokedCard: [],
@@ -16,16 +16,17 @@ const INITIAL_STATE_VALUE = {
   username: "",
   score: 0,
 };
+
 export const authContext = createContext<{
   gameState: GameState;
   dispatch: Dispatch<GameAction>;
 }>({
-  gameState: INITIAL_STATE_VALUE,
+  gameState: INITIAL_STATE,
   dispatch: () => {},
 });
 
 const AuthProvider = (props: IContext) => {
-  const [gameState, dispatch] = useReducer(gameReducer, INITIAL_STATE_VALUE);
+  const [gameState, dispatch] = useReducer(gameReducer, INITIAL_STATE);
 
   const value = {
     gameState,

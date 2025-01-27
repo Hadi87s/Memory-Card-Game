@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
 import { ELevels, ICard } from "../types/@types";
-
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 
@@ -54,9 +53,9 @@ const GameScreen = () => {
 
   useEffect(() => {
     if (gameState.invokedCard.length === 2) {
+      const [firstCard, secondCard] = gameState.invokedCard;
       dispatch({ type: "COMPARE_CARDS", payload: true });
       dispatch({ type: "INCREMENT_TRIES" });
-      const [firstCard, secondCard] = gameState.invokedCard;
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
@@ -70,6 +69,7 @@ const GameScreen = () => {
             ? { ...card, isFlipped: true, visible: true, isFigured: true }
             : card
         );
+
         setCards(updatedCards);
       } else {
         // Flip the cards back after a delay
@@ -79,6 +79,7 @@ const GameScreen = () => {
               ? { ...card, isFlipped: false, visible: false, isRevealed: false } // Resetting the cards to the initial state
               : card
           );
+
           setCards(updatedCards);
         }, 1000);
       }
