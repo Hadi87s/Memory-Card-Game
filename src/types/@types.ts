@@ -18,7 +18,7 @@ export interface ICard {
 export interface GameState {
   cards: ICard[];
   isComparing: boolean;
-  isInvoked: ICard[];
+  invokedCard: ICard[];
   elapsedTime: number;
   isPuzzleComplete: boolean;
   tries: number;
@@ -28,6 +28,7 @@ export type GameAction =
   | { type: "UPDATE_CARDS"; payload: ICard[] }
   | { type: "CLICK_CARD"; payload: ICard[] }
   | { type: "COMPARE_CARDS"; payload: boolean }
+  | { type: "INVOKED_CARDS"; payload: ICard[] }
   | { type: "RESET_CARDS"; payload: ICard }
   | { type: "INCREMENT_TIME"; payload: number }
   | { type: "COMPLETE_PUZZLE"; payload: boolean }

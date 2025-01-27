@@ -13,8 +13,7 @@ const GameScreen = () => {
   const { username, score, setPlayerScore } = useContext(authContext);
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-  // const [isComparing, setIsComparing] = useState(false);
-  const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
+  // const [invokedCard, setInvokedCard] = useState<ICard[]>([]);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isPuzzleComplete, clearIfComplete] = useState<boolean>(false);
   const [tries, setTries] = useState<number>(0);
@@ -22,7 +21,7 @@ const GameScreen = () => {
   const [gameState, dispatch] = useReducer(gameReducer, {
     cards: [],
     isComparing: false,
-    isInvoked: [],
+    invokedCard: [],
     elapsedTime: 0,
     isPuzzleComplete: false,
     tries: 0,
@@ -33,10 +32,11 @@ const GameScreen = () => {
       !gameState.isComparing &&
       !clickedCard.isFigured &&
       !clickedCard.isRevealed &&
-      invokedCard.length < 2
+      gameState.invokedCard.length < 2
     ) {
       updateCards(clickedCard, true);
-      setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
+      // setInvokedCard((oldInvoked) => [...oldInvoked, clickedCard]);
+      dispatch({type:"INVOKED_CARDS", payload:[clickedCard]});
     }
   };
 
@@ -73,11 +73,11 @@ const GameScreen = () => {
   }, [isPuzzleComplete]);
 
   useEffect(() => {
-    if (invokedCard.length === 2) {
+    if (gameState.invokedCard.length === 2) {
       //setIsComparing(true); // Disable further clicks
       dispatch({ type: "COMPARE_CARDS", payload: true });
       setTries(tries + 1);
-      const [firstCard, secondCard] = invokedCard;
+      const [firstCard, secondCard] = gameState.invokedCard;
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
@@ -107,12 +107,14 @@ const GameScreen = () => {
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
-        setInvokedCard([]);
+        // setInvokedCard([]);
+        dispatch({type:"INVOKED_CARDS", payload:[]}); // TODO: This should work just fine and invoke cards as usual
+
         //setIsComparing(false); // Re-enable clicks
         dispatch({ type: "COMPARE_CARDS", payload: false });
       }, 1000);
     }
-  }, [invokedCard]);
+  }, [gameState.invokedCard]);
 
   return (
     <div className="screen game-screen">
