@@ -27,6 +27,6 @@ export type GameAction =
   | { type: "UPDATE_CARDS"; payload: ICard[] }
   | { type: "COMPARE_CARDS"; payload: boolean }
   | { type: "INVOKED_CARDS"; payload: ICard[] }
-  | { type: "INCREMENT_TIME"; payload?: number }
+  | { type: "INCREMENT_TIME"; payload: number }
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
   | { type: "INCREMENT_TRIES"; payload?: number };

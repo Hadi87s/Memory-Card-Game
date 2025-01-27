@@ -55,9 +55,10 @@ const GameScreen = () => {
   useEffect(() => {
     if (!gameState.isPuzzleComplete) {
       intervalID.current = setInterval(() => {
-        dispatch({ type: "INCREMENT_TIME" });
+        dispatch({ type: "INCREMENT_TIME", payload: 1 });
       }, 1000);
     } else {
+      
       clearInterval(intervalID.current);
     }
   }, [gameState.isPuzzleComplete]);
@@ -113,7 +114,7 @@ const GameScreen = () => {
         <div className="elapsed-time">
           <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
           <span
-            style={{ color: gameState.isPuzzleComplete ? "green" : "gold" }}
+            style={{ color: gameState.isPuzzleComplete ? "green" : "#111" }}
           >
             {formatTime(gameState.elapsedTime)}
           </span>
