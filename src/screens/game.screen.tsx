@@ -52,6 +52,7 @@ const GameScreen = () => {
     } else {
       clearInterval(intervalID.current);
     }
+    return () => clearInterval(intervalID.current);
   }, [gameState.isPuzzleComplete]);
 
   useEffect(() => {
@@ -93,7 +94,12 @@ const GameScreen = () => {
       }, 1000);
     }
   }, [gameState.invokedCard]);
-  console.log(gameState);
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: "RESET_GAME" }); // Reset the game state when leaving
+    };
+  }, [location, dispatch]);
 
   return (
     <div className="screen game-screen">
