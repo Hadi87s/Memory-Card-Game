@@ -90,7 +90,7 @@ const GameScreen = () => {
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
-        dispatch({ type: "INVOKED_CARDS", payload: null }); // TODO: This should work just fine and invoke cards as usual
+        dispatch({ type: "INVOKED_CARDS", payload: null });
         dispatch({ type: "COMPARE_CARDS", payload: false });
       }, 1000);
     }
@@ -99,7 +99,7 @@ const GameScreen = () => {
 
   return (
     <div className="screen game-screen">
-      <div
+      <div // Todo: add play Again & open scoreboard buttons here, and move it into a separate component as well
         ref={revealWin}
         className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
       >

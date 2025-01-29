@@ -47,9 +47,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: rgba(250, 204, 0, 0.551);
+    background-color: #1976d25f;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 23px;
+    text-align: center;
 }
 
+.gameWon div {
+    text-align: center;
+}
 
 .reveal {
     opacity: 1;
