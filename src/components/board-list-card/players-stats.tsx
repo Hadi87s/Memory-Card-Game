@@ -3,11 +3,24 @@ import PlayerScore from "../player-score/player-score";
 import "./players-stats.css";
 interface IProps {
   players: playerStats[];
+  level: number;
 }
 const PlayersStats = (props: IProps) => {
   return (
     <div className="levelCard">
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <div className="mode">
+        {props.level === 2 ? "Easy" : props.level === 4 ? "Medium" : "Hard"}
+        <div style={{ fontSize: "16px", color: "#1976d2" }}>
+          (max-score: {props.level ** 2 / 2})
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          marginBottom: "10px",
+        }}
+      >
         <span>Username</span>
         <span>Moves</span>
         <span>Time</span>

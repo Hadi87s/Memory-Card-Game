@@ -72,9 +72,9 @@ const ScoreboardScreen = () => {
   console.log(hardList);
   return (
     <div className="scoreBoard">
-      <PlayersStats players={easyList} />
-      <PlayersStats players={mediumList} />
-      <PlayersStats players={hardList} />
+      <PlayersStats level={2} players={easyList} />
+      <PlayersStats level={4} players={mediumList} />
+      <PlayersStats level={6} players={hardList} />
     </div>
   );
 };

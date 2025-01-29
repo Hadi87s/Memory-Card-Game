@@ -1,4 +1,3 @@
-import React from "react";
 import { playerStats } from "../../types/@types";
 
 interface IProps {
@@ -6,12 +5,12 @@ interface IProps {
 }
 const PlayerScore = (props: IProps) => {
   return (
-      <div className="playerScore">
-        <span className="name">{props.player.username}</span>
-        <span className="moves">{props.player.moves}</span>
-        <span className="elapsedTime">{props.player.elapsedTime}</span>
-        <span className="score">{props.player.score}</span>
-      </div>
+    <div className="playerScore" style={{ marginBottom: "5px" }}>
+      <span className="name">{props.player.username}</span>
+      <span className="moves">{props.player.moves}</span>
+      <span className="elapsedTime">{props.player.elapsedTime}</span>
+      <span className="score">{props.player.score}</span>
+    </div>
   );
 };
 
