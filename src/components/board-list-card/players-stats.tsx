@@ -1,4 +1,5 @@
 import { playerStats } from "../../types/@types";
+import PlayerScore from "../player-score/player-score";
 import "./players-stats.css";
 interface IProps {
   players: playerStats[];
@@ -6,8 +7,14 @@ interface IProps {
 const PlayersStats = (props: IProps) => {
   return (
     <div className="levelCard">
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <span>Username</span>
+        <span>Moves</span>
+        <span>Time</span>
+        <span>Score</span>
+      </div>
       {props.players.map((player) => (
-        <div className="player">{player.username}</div> // this should be a component as well.
+        <PlayerScore player={player} />
       ))}
     </div>
   );

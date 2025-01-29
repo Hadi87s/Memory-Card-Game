@@ -11,6 +11,7 @@ const GameScreen = () => {
   const CURRENT_LEVEL = gameState.level || 4;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const intervalID = useRef<number>(0);
+  const revealWin = useRef(null);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
   const navigate = useNavigate();
   const handleOnClick = (clickedCard: ICard) => {
@@ -64,6 +65,9 @@ const GameScreen = () => {
 
         if (gameState.score + 1 == MAX_SCORE) {
           dispatch({ type: "COMPLETE_PUZZLE", payload: true });
+          setTimeout(() => {
+            navigate("/score-board");
+          }, 2000);
         }
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
@@ -95,6 +99,13 @@ const GameScreen = () => {
 
   return (
     <div className="screen game-screen">
+      <div
+        ref={revealWin}
+        className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
+      >
+        You've Won the Game!{" "}
+        <div>You will be redirected to the scoreboard in a second!</div>
+      </div>
       <div className="placeholder status">
         <div className="username">
           <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
@@ -113,15 +124,6 @@ const GameScreen = () => {
         </div>
         <div className="tries">
           <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
-        </div>
-        <div className="button">
-          <button
-            onClick={() => {
-              navigate("/score-board");
-            }}
-          >
-            Score Board
-          </button>
         </div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
