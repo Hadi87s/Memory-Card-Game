@@ -106,11 +106,36 @@ const GameScreen = () => {
           You will be redirected to the scoreboard in a second!
         </div>
         <Stack spacing={2} direction="row">
-          <Button variant="contained">Play Again</Button>
-          <Button onClick={() => navigate("/")} variant="contained">
+          <Button
+            onClick={() => {
+              dispatch({ type: "RESET_GAME" });
+              setCards(createGameBoard(CURRENT_LEVEL));
+              clearInterval(intervalID.current);
+            }}
+            variant="contained"
+          >
+            Play Again
+          </Button>
+          <Button
+            onClick={() => {
+              dispatch({ type: "RESET_GAME" });
+              setCards(createGameBoard(CURRENT_LEVEL));
+              clearInterval(intervalID.current);
+              navigate("/");
+            }}
+            variant="contained"
+          >
             Switch Mode
           </Button>
-          <Button onClick={() => navigate("/score-board")} variant="contained">
+          <Button
+            onClick={() => {
+              dispatch({ type: "RESET_GAME" });
+              setCards(createGameBoard(CURRENT_LEVEL));
+              clearInterval(intervalID.current);
+              navigate("/score-board");
+            }}
+            variant="contained"
+          >
             ScoreBoard
           </Button>
         </Stack>

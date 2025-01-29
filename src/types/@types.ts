@@ -34,7 +34,7 @@ export type GameAction =
   | { type: "INCREMENT_TRIES"; payload?: number }
   | { type: "USER_SCORE"; payload?: number }
   | { type: "SELECT_LEVEL"; payload: number }
-  | { type: "INITIALIZE_STATE" };
+  | { type: "RESET_GAME" };
 
 export interface playerStats {
   username: string;

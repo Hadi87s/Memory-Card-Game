@@ -33,16 +33,15 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "SELECT_LEVEL": {
       return { ...state, level: action.payload };
     }
-    case "INITIALIZE_STATE": {
+    case "RESET_GAME": {
       return {
+        ...state,
         isComparing: false,
         invokedCard: [],
         elapsedTime: 0,
         isPuzzleComplete: false,
         moves: 0,
-        username: "",
         score: 0,
-        level: 0,
       };
     }
     default:
