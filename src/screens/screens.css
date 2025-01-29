@@ -40,6 +40,7 @@
 }
 
 .gameWon{
+    height: 300px;
     opacity: 0;
     z-index: 10;
     position: absolute;
@@ -54,6 +55,7 @@
     align-items: center;
     border-radius: 23px;
     text-align: center;
+    backdrop-filter: blur(3px);
 }
 
 .gameWon div {

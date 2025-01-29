@@ -5,6 +5,7 @@ import { ICard } from "../types/@types";
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
+import { Button, Stack } from "@mui/material";
 
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
@@ -65,9 +66,6 @@ const GameScreen = () => {
 
         if (gameState.score + 1 == MAX_SCORE) {
           dispatch({ type: "COMPLETE_PUZZLE", payload: true });
-          setTimeout(() => {
-            navigate("/score-board");
-          }, 2000);
         }
         const updatedCards = cards.map((card) =>
           card.id === firstCard.id || card.id === secondCard.id
@@ -104,7 +102,18 @@ const GameScreen = () => {
         className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
       >
         You've Won the Game!{" "}
-        <div>You will be redirected to the scoreboard in a second!</div>
+        <div style={{ marginBottom: "10px" }}>
+          You will be redirected to the scoreboard in a second!
+        </div>
+        <Stack spacing={2} direction="row">
+          <Button variant="contained">Play Again</Button>
+          <Button onClick={() => navigate("/")} variant="contained">
+            Switch Mode
+          </Button>
+          <Button onClick={() => navigate("/score-board")} variant="contained">
+            ScoreBoard
+          </Button>
+        </Stack>
       </div>
       <div className="placeholder status">
         <div className="username">
