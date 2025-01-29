@@ -9,7 +9,7 @@ import { Button, Stack } from "@mui/material";
 
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
-  const CURRENT_LEVEL = gameState.level || 4;
+  const CURRENT_LEVEL = gameState.level || 2;
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const intervalID = useRef<number>(0);
   const revealWin = useRef(null);

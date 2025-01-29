@@ -1,13 +1,12 @@
 import { createContext, Dispatch, useReducer } from "react";
 import gameReducer from "../state/gameReducer";
-import { ELevels, GameAction, GameState } from "../types/@types";
+import { GameAction, GameState } from "../types/@types";
 
 interface IContext {
   children: React.ReactNode;
 }
 
 const INITIAL_STATE = {
-  cards: [],
   isComparing: false,
   invokedCard: [],
   elapsedTime: 0,

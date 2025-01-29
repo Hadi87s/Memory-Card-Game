@@ -33,7 +33,8 @@ export type GameAction =
   | { type: "INCREMENT_TIME"; payload: number }
   | { type: "INCREMENT_TRIES"; payload?: number }
   | { type: "USER_SCORE"; payload?: number }
-  | { type: "SELECT_LEVEL"; payload: number };
+  | { type: "SELECT_LEVEL"; payload: number }
+  | { type: "INITIALIZE_STATE" };
 
 export interface playerStats {
   username: string;

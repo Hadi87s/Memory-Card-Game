@@ -41,7 +41,7 @@
 
 .gameWon{
     height: 300px;
-    opacity: 0;
+    display: none;
     z-index: 10;
     position: absolute;
     top: 50%;
@@ -49,7 +49,6 @@
     transform: translate(-50%, -50%);
     padding: 20px;
     background-color: #1976d25f;
-    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -63,5 +62,5 @@
 }
 
 .reveal {
-    opacity: 1;
+    display: flex;
 }
