@@ -24,6 +24,13 @@ const player3: playerStats = {
   score: 18,
   level: 6,
 };
+const player4: playerStats = {
+  username: "Zahi",
+  moves: 67,
+  elapsedTime: 364,
+  score: 18,
+  level: 6,
+};
 const ScoreboardScreen = () => {
   const { gameState } = useContext(authContext);
   const player: playerStats = {
@@ -38,20 +45,21 @@ const ScoreboardScreen = () => {
   const [hardList, setHardList] = useState<playerStats[]>([]);
 
   useEffect(() => {
-    setEasyList([...easyList, player1]);
-    setMediumList([...mediumList, player2]);
-    setHardList([...hardList, player3]);
+    setEasyList((prevEasyList) => [...prevEasyList, player1]);
+    setMediumList((prevMediumList) => [...prevMediumList, player2]);
+    setHardList((prevHardList) => [...prevHardList, player3]);
+    setHardList((prevHardList) => [...prevHardList, player4]);
     switch (gameState.level) {
       case 2: {
-        setEasyList([...easyList, player]);
+        setEasyList((prevEasyList) => [...prevEasyList, player]);
         break;
       }
       case 4: {
-        setMediumList([...mediumList, player]);
+        setMediumList((prevMediumList) => [...prevMediumList, player]);
         break;
       }
       case 6: {
-        setHardList([...hardList, player]);
+        setHardList((prevHardList) => [...prevHardList, player]);
         break;
       }
       default: {
