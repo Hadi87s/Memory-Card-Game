@@ -30,3 +30,11 @@
     }
 }
 
+
+.scoreBoard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 95vh;
+}

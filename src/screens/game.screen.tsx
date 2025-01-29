@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
-import {  ICard } from "../types/@types";
+import { ICard } from "../types/@types";
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
+import { useNavigate } from "react-router-dom";
 
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
@@ -11,7 +12,7 @@ const GameScreen = () => {
   const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
-
+  const navigate = useNavigate();
   const handleOnClick = (clickedCard: ICard) => {
     if (
       !gameState.isComparing &&
@@ -90,6 +91,7 @@ const GameScreen = () => {
       }, 1000);
     }
   }, [gameState.invokedCard]);
+  console.log(gameState);
 
   return (
     <div className="screen game-screen">
@@ -111,6 +113,15 @@ const GameScreen = () => {
         </div>
         <div className="tries">
           <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
+        </div>
+        <div className="button">
+          <button
+            onClick={() => {
+              navigate("/score-board");
+            }}
+          >
+            Score Board
+          </button>
         </div>
       </div>
       <div className={`placeholder game Level_${CURRENT_LEVEL}`}>

@@ -17,10 +17,10 @@ export interface ICard {
 export interface GameState {
   isComparing: boolean;
   invokedCard: ICard[];
-  elapsedTime: number;
   isPuzzleComplete: boolean;
-  moves: number;
   username: string;
+  elapsedTime: number;
+  moves: number;
   score: number;
   level: number;
 }
@@ -28,9 +28,17 @@ export interface GameState {
 export type GameAction =
   | { type: "COMPARE_CARDS"; payload: boolean }
   | { type: "INVOKED_CARDS"; payload: ICard | null }
-  | { type: "INCREMENT_TIME"; payload: number }
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
-  | { type: "INCREMENT_TRIES"; payload?: number }
   | { type: "USER_LOGIN"; payload: string }
+  | { type: "INCREMENT_TIME"; payload: number }
+  | { type: "INCREMENT_TRIES"; payload?: number }
   | { type: "USER_SCORE"; payload?: number }
   | { type: "SELECT_LEVEL"; payload: number };
+
+export interface playerStats {
+  username: string;
+  moves: number;
+  elapsedTime: number;
+  score: number;
+  level: number;
+}
