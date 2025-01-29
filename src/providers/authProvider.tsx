@@ -1,6 +1,6 @@
 import { createContext, Dispatch, useReducer } from "react";
 import gameReducer from "../state/gameReducer";
-import { GameAction, GameState } from "../types/@types";
+import { ELevels, GameAction, GameState } from "../types/@types";
 
 interface IContext {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   moves: 0,
   username: "",
   score: 0,
+  level: 0,
 };
 
 export const authContext = createContext<{

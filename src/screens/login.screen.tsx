@@ -22,8 +22,11 @@ const LoginScreen = () => {
 
   const handlePlayButton = () => {
     if (nameField.current && level.current) {
-      // setUserName(nameField.current.value);
       dispatch({ type: "USER_LOGIN", payload: nameField.current.value }); // setting the username on login
+      // here we'll send the level to the reducer as well.
+      console.log(typeof level.current.value);
+
+      dispatch({ type: "SELECT_LEVEL", payload: Number(level.current.value) });
       navigate("/game");
     }
   };

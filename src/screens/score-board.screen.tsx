@@ -1,7 +1,9 @@
-import React from "react";
+import { useContext } from "react";
+import { authContext } from "../providers/authProvider";
 
 const ScoreboardScreen = () => {
-  return <div></div>;
+  const { gameState, dispatch } = useContext(authContext);
+  return <div>Hello {gameState.username ? gameState.username : "Unknown"}</div>;
 };
 
 export default ScoreboardScreen;

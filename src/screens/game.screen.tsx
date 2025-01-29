@@ -1,14 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./screens.css";
 import Card from "../components/card/card";
-import { ELevels, ICard } from "../types/@types";
+import {  ICard } from "../types/@types";
 import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 
 const GameScreen = () => {
-  const CURRENT_LEVEL = ELevels.MEDIUM;
-  const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const { gameState, dispatch } = useContext(authContext);
+  const CURRENT_LEVEL = gameState.level || 4;
+  const MAX_SCORE = CURRENT_LEVEL ** 2 / 2;
   const intervalID = useRef<number>(0);
   const [cards, setCards] = useState<ICard[]>(createGameBoard(CURRENT_LEVEL));
 

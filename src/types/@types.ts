@@ -22,6 +22,7 @@ export interface GameState {
   moves: number;
   username: string;
   score: number;
+  level: number;
 }
 
 export type GameAction =
@@ -31,4 +32,5 @@ export type GameAction =
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
   | { type: "INCREMENT_TRIES"; payload?: number }
   | { type: "USER_LOGIN"; payload: string }
-  | { type: "USER_SCORE"; payload?: number };
+  | { type: "USER_SCORE"; payload?: number }
+  | { type: "SELECT_LEVEL"; payload: number };

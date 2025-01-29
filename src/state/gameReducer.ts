@@ -30,6 +30,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "USER_SCORE": {
       return { ...state, score: state.score + 1 };
     }
+    case "SELECT_LEVEL": {
+      return { ...state, level: action.payload };
+    }
     default:
       return state;
   }
