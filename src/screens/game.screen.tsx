@@ -107,9 +107,8 @@ const GameScreen = () => {
         ref={revealWin}
         className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
       >
-        You've Won the Game!{" "}
-        <div style={{ marginBottom: "10px" }}>
-          You will be redirected to the scoreboard in a second!
+        <div style={{ marginBottom: "10px", fontSize: "24px" }}>
+          You've Won the Game!
         </div>
         <Stack spacing={2} direction="row">
           <Button

@@ -38,7 +38,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <div>
+    <div className="loginContainer">
       <div className="login-form">
         <TextField
           inputRef={nameField}
