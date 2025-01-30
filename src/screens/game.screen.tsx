@@ -7,7 +7,9 @@ import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import ScoreboardRoundedIcon from "@mui/icons-material/ScoreboardRounded";
+import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
   const CURRENT_LEVEL = gameState.level || 2;
@@ -106,6 +108,7 @@ const GameScreen = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
       animate={{ opacity: 1, y: 0 }} // Slide up to original position
+      exit={{ opacity: 0, scale: 0.5 }}
       transition={{
         duration: 0.4,
         ease: "easeInOut", // Smooth easing
@@ -128,7 +131,7 @@ const GameScreen = () => {
               }}
               variant="contained"
             >
-              Play Again
+              Play Again <PlayArrowRoundedIcon />
             </Button>
             <Button
               onClick={() => {
@@ -139,7 +142,7 @@ const GameScreen = () => {
               }}
               variant="contained"
             >
-              Switch Mode
+              Switch Mode <ModeRoundedIcon />
             </Button>
             <Button
               onClick={() => {
@@ -150,7 +153,7 @@ const GameScreen = () => {
               }}
               variant="contained"
             >
-              ScoreBoard
+              ScoreBoard <ScoreboardRoundedIcon />
             </Button>
           </Stack>
         </div>

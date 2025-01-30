@@ -7,12 +7,12 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { useContext, useRef } from "react"; // Adjust the import path as necessary
 import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ELevels } from "../types/@types";
-import { motion } from "framer-motion";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
@@ -69,7 +69,7 @@ const LoginScreen = () => {
           className="custom-mui-button"
           variant="contained"
         >
-          Start Playing
+          Play <PlayArrowRoundedIcon />
         </Button>
       </div>
     </div>
