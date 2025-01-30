@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../providers/authProvider";
 import PlayersStats from "../components/board-list-card/players-stats";
 import { playerStats } from "../types/@types";
+import { motion } from "framer-motion";
 
 const player1: playerStats = {
   username: "Ali",
@@ -71,11 +72,20 @@ const ScoreboardScreen = () => {
   console.log(mediumList);
   console.log(hardList);
   return (
-    <div className="scoreBoard">
-      <PlayersStats level={2} players={easyList} />
-      <PlayersStats level={4} players={mediumList} />
-      <PlayersStats level={6} players={hardList} />
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
+      animate={{ opacity: 1, y: 0 }} // Slide up to original position
+      transition={{
+        duration: 0.4,
+        ease: "easeInOut", // Smooth easing
+      }}
+    >
+      <div className="scoreBoard">
+        <PlayersStats level={2} players={easyList} />
+        <PlayersStats level={4} players={mediumList} />
+        <PlayersStats level={6} players={hardList} />
+      </div>
+    </motion.div>
   );
 };
 

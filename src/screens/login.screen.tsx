@@ -12,6 +12,7 @@ import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ELevels } from "../types/@types";
+import { motion } from "framer-motion";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);

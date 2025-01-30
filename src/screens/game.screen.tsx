@@ -6,6 +6,7 @@ import { createGameBoard } from "../utils/game.util";
 import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
+import { motion } from "framer-motion";
 
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
@@ -102,75 +103,84 @@ const GameScreen = () => {
   }, [location, dispatch]);
 
   return (
-    <div className="screen game-screen">
-      <div // Todo: add play Again & open scoreboard buttons here, and move it into a separate component as well
-        ref={revealWin}
-        className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
-      >
-        <div style={{ marginBottom: "10px", fontSize: "24px" }}>
-          You've Won the Game!
+    <motion.div
+      initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
+      animate={{ opacity: 1, y: 0 }} // Slide up to original position
+      transition={{
+        duration: 0.4,
+        ease: "easeInOut", // Smooth easing
+      }}
+    >
+      <div className="screen game-screen">
+        <div // Todo: add play Again & open scoreboard buttons here, and move it into a separate component as well
+          ref={revealWin}
+          className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
+        >
+          <div style={{ marginBottom: "10px", fontSize: "24px" }}>
+            You've Won the Game!
+          </div>
+          <Stack spacing={2} direction="row">
+            <Button
+              onClick={() => {
+                dispatch({ type: "RESET_GAME" });
+                setCards(createGameBoard(CURRENT_LEVEL));
+                clearInterval(intervalID.current);
+              }}
+              variant="contained"
+            >
+              Play Again
+            </Button>
+            <Button
+              onClick={() => {
+                dispatch({ type: "RESET_GAME" });
+                setCards(createGameBoard(CURRENT_LEVEL));
+                clearInterval(intervalID.current);
+                navigate("/");
+              }}
+              variant="contained"
+            >
+              Switch Mode
+            </Button>
+            <Button
+              onClick={() => {
+                dispatch({ type: "RESET_GAME" });
+                setCards(createGameBoard(CURRENT_LEVEL));
+                clearInterval(intervalID.current);
+                navigate("/score-board");
+              }}
+              variant="contained"
+            >
+              ScoreBoard
+            </Button>
+          </Stack>
         </div>
-        <Stack spacing={2} direction="row">
-          <Button
-            onClick={() => {
-              dispatch({ type: "RESET_GAME" });
-              setCards(createGameBoard(CURRENT_LEVEL));
-              clearInterval(intervalID.current);
-            }}
-            variant="contained"
-          >
-            Play Again
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch({ type: "RESET_GAME" });
-              setCards(createGameBoard(CURRENT_LEVEL));
-              clearInterval(intervalID.current);
-              navigate("/");
-            }}
-            variant="contained"
-          >
-            Switch Mode
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch({ type: "RESET_GAME" });
-              setCards(createGameBoard(CURRENT_LEVEL));
-              clearInterval(intervalID.current);
-              navigate("/score-board");
-            }}
-            variant="contained"
-          >
-            ScoreBoard
-          </Button>
-        </Stack>
+        <div className="placeholder status">
+          <div className="username">
+            <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
+            {gameState.username ? gameState.username : "Unknown"}!{" "}
+          </div>
+          <div className="score">
+            <span style={{ color: "#1976d2" }}>Score: </span> {gameState.score}
+          </div>
+          <div className="elapsed-time">
+            <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
+            <span
+              style={{ color: gameState.isPuzzleComplete ? "green" : "#111" }}
+            >
+              {formatTime(gameState.elapsedTime)}
+            </span>
+          </div>
+          <div className="tries">
+            <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
+          </div>
+        </div>
+        <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
+          {cards.map((card, index) => (
+            <Card key={index} card={card} passEvent={handleOnClick} />
+          ))}
+        </div>
       </div>
-      <div className="placeholder status">
-        <div className="username">
-          <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
-          {gameState.username ? gameState.username : "Unknown"}!{" "}
-        </div>
-        <div className="score">
-          <span style={{ color: "#1976d2" }}>Score: </span> {gameState.score}
-        </div>
-        <div className="elapsed-time">
-          <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
-          <span
-            style={{ color: gameState.isPuzzleComplete ? "green" : "#111" }}
-          >
-            {formatTime(gameState.elapsedTime)}
-          </span>
-        </div>
-        <div className="tries">
-          <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
-        </div>
-      </div>
-      <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
-        {cards.map((card, index) => (
-          <Card key={index} card={card} passEvent={handleOnClick} />
-        ))}
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
