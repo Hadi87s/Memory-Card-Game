@@ -29,7 +29,7 @@
   
   .card.flip {
     transform: rotateY(180deg);
-    transition: transform 250ms ease-in;
+    transition: transform 300ms ease-in;
   }
   
   .card-front,
@@ -38,7 +38,7 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden; /* Hides the back of the card */
-    transition: transform 250ms ease-in; /* Smooth transition */
+    transition: transform 300ms ease-in; /* Smooth transition */
     display: flex;
     justify-content: center;
     align-items: center;

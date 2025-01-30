@@ -88,13 +88,13 @@ const GameScreen = () => {
           );
 
           setCards(updatedCards);
-        }, 1000);
+        }, 800);
       }
       // Reset the invokedCard array and allow new clicks after a delay
       setTimeout(() => {
         dispatch({ type: "INVOKED_CARDS", payload: null });
         dispatch({ type: "COMPARE_CARDS", payload: false });
-      }, 1000);
+      }, 800);
     }
   }, [gameState.invokedCard]);
 
