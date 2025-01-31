@@ -16,7 +16,7 @@ import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ELevels } from "../types/@types";
-import { color } from "framer-motion";
+import { color, motion } from "framer-motion";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
@@ -53,40 +53,54 @@ const LoginScreen = () => {
         <Typography variant="h1" align="center" className="gameTitle">
           Memory Game
         </Typography>
-        <Stack spacing={1} alignItems="center" className="custom-mui-container">
-          <TextField
-            inputRef={nameField}
-            className="custom-mui-textfield"
-            id="outlined-basic"
-            label="Player Name"
-            variant="outlined"
-          />
-          <FormControl className="custom-mui-dropdown">
-            <InputLabel id="demo-simple-select-label">Level</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Label"
-              onChange={handleChange}
-              inputRef={level}
-            >
-              <MenuItem value={ELevels.EASY}>Easy</MenuItem>
-              <MenuItem value={ELevels.MEDIUM}>Medium</MenuItem>
-              <MenuItem value={ELevels.HARD}>Hard</MenuItem>
-            </Select>
-          </FormControl>
-          <Button
-            onClick={handlePlayButton}
-            id="play"
-            className="custom-mui-button"
-            variant="contained"
-            endIcon={<PlayArrowRoundedIcon />}
-            size="large"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
+          animate={{ opacity: 1, y: 0 }} // Slide up to original position
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{
+            duration: 0.4,
+            ease: "easeInOut", // Smooth easing
+          }}
+        >
+          <Stack
+            spacing={1}
+            alignItems="center"
+            className="custom-mui-container"
           >
-            Play
-          </Button>
-        </Stack>
+            <TextField
+              inputRef={nameField}
+              className="custom-mui-textfield"
+              id="outlined-basic"
+              label="Player Name"
+              variant="outlined"
+            />
+            <FormControl className="custom-mui-dropdown">
+              <InputLabel id="demo-simple-select-label">Level</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Label"
+                onChange={handleChange}
+                inputRef={level}
+              >
+                <MenuItem value={ELevels.EASY}>Easy</MenuItem>
+                <MenuItem value={ELevels.MEDIUM}>Medium</MenuItem>
+                <MenuItem value={ELevels.HARD}>Hard</MenuItem>
+              </Select>
+            </FormControl>
+            <Button
+              onClick={handlePlayButton}
+              id="play"
+              className="custom-mui-button"
+              variant="contained"
+              endIcon={<PlayArrowRoundedIcon />}
+              size="large"
+            >
+              Play
+            </Button>
+          </Stack>
+        </motion.div>
       </Container>
     </div>
   );
