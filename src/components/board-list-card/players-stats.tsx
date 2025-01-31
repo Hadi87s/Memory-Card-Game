@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import { playerStats } from "../../types/@types";
 import PlayerScore from "../player-score/player-score";
 import "./players-stats.css";
@@ -26,9 +27,20 @@ const PlayersStats = (props: IProps) => {
         <span>Time</span>
         <span>Score</span>
       </div>
-      {props.players.map((player, index) => (
-        <PlayerScore key={player.username + index} player={player} />
-      ))}
+      {props.players.length ? (
+        props.players.map((player, index) => (
+          <PlayerScore key={player.username + index} player={player} />
+        ))
+      ) : (
+        <div
+          style={{
+            textAlign: "center",
+            color: "yellow",
+          }}
+        >
+          No Data Available
+        </div>
+      )}
     </div>
   );
 };
