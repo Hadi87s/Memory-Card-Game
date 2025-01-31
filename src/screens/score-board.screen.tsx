@@ -3,6 +3,7 @@ import { authContext } from "../providers/authProvider";
 import PlayersStats from "../components/board-list-card/players-stats";
 import { playerStats } from "../types/@types";
 import { motion } from "framer-motion";
+import { Button, Typography } from "@mui/material";
 
 const ScoreboardScreen = () => {
   const { gameState } = useContext(authContext);

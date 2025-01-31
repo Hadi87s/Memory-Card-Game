@@ -1,4 +1,3 @@
-import { div } from "framer-motion/client";
 import { playerStats } from "../../types/@types";
 import PlayerScore from "../player-score/player-score";
 import "./players-stats.css";
@@ -32,14 +31,7 @@ const PlayersStats = (props: IProps) => {
           <PlayerScore key={player.username + index} player={player} />
         ))
       ) : (
-        <div
-          style={{
-            textAlign: "center",
-            color: "yellow",
-          }}
-        >
-          No Data Available
-        </div>
+        <div className="no-data">No Data Available</div>
       )}
     </div>
   );
