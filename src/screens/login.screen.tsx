@@ -8,6 +8,7 @@ import {
   SelectChangeEvent,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { useContext, useRef } from "react"; // Adjust the import path as necessary
@@ -48,7 +49,10 @@ const LoginScreen = () => {
   return (
     <div className="login-form">
       <Container>
-       <div className="image"></div>
+        <div className="image"></div>
+        <Typography variant="h1" align="center" className="gameTitle">
+          Memory Game
+        </Typography>
         <Stack spacing={1} alignItems="center" className="custom-mui-container">
           <TextField
             inputRef={nameField}
