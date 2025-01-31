@@ -1,5 +1,7 @@
-.screen{
+.screen {
     display: flex;
+    background-image: linear-gradient(75deg, #c2d7e8, #89a3e4ef, #5184d0e1, #015bb5ca);
+    border-radius: 12px;
 }
 
 .login-form .custom-mui-textfield,
@@ -24,8 +26,8 @@
 
 
 .gameWon{
-    width: 96%;
-    height: 91%;
+    width: 40%;
+    height: 40%;
     display: none;
     z-index: 10;
     position: absolute;
@@ -57,7 +59,7 @@
     justify-content: space-between;
     padding: 15px;
     width: 250px;
-    background-color: #ffffff2e;
+    background-color: #36487370;
     backdrop-filter: blur(3px);
     border-radius: 6px;
     margin-bottom: 10px;

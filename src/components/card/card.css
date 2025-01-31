@@ -12,7 +12,7 @@
     font-size: 100px;
     cursor: pointer;
     color: #1976d2;
-    border: 1px solid #1976d2;
+    border: 1px solid #f1f1f1;
     -webkit-text-stroke: 1px black;
   }
   
@@ -64,5 +64,5 @@
   }
 
   .card:hover .card-front{
-    background-color:#1976d2;
+    background-color:#70ace86b;
   }

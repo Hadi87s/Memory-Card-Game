@@ -18,7 +18,7 @@ const Status = (props: IProps) => {
       <div className="elapsed-time">
         <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
         <span
-          style={{ color: props.state.isPuzzleComplete ? "green" : "#111" }}
+          style={{ color: props.state.isPuzzleComplete ? "green" : "#f1f1f1" }}
         >
           {formatTime(props.state.elapsedTime)}
         </span>

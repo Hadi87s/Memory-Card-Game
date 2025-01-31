@@ -7,7 +7,7 @@ body {
 }
 
 .common {
-  border: 2px solid #1976d2;
+  border: 2px solid #f1f1f1;
   display: flex;
   justify-content: center;
   padding: 1rem;
@@ -15,7 +15,7 @@ body {
 }
 
 .status {
-  color: #111;
+  color: #f1f1f1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

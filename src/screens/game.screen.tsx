@@ -185,26 +185,6 @@ const GameScreen = () => {
             </Button>
           </Stack>
         </div>
-        {/* <div className="common status">
-          <div className="username">
-            <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
-            {gameState.username ? gameState.username : "Unknown"}!{" "}
-          </div>
-          <div className="score">
-            <span style={{ color: "#1976d2" }}>Score: </span> {gameState.score}
-          </div>
-          <div className="elapsed-time">
-            <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
-            <span
-              style={{ color: gameState.isPuzzleComplete ? "green" : "#111" }}
-            >
-              {formatTime(gameState.elapsedTime)}
-            </span>
-          </div>
-          <div className="tries">
-            <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
-          </div>
-        </div> */}
         <Status state={gameState} />
 
         <div className={`common game Level_${CURRENT_LEVEL}`}>
