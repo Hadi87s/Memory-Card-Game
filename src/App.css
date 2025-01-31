@@ -64,7 +64,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #5d9ad75d;
+  background-image: linear-gradient(to right, #6aaff55d, rgba(245, 110, 110, 0.501));
 }
 
 .custom-mui-dropdown{
@@ -73,12 +73,16 @@ body {
 }
 
 .custom-mui-container {
-  width: 250px;
-    background: #ffffffc4;
+    width: 350px;
+    background-image: linear-gradient(to left, rgba(208, 208, 245, 0.601), rgba(216, 248, 251, 0.574));
     padding: 1.5rem;
     margin: 0 auto;
     border-radius: 10px;
     backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(239, 226, 226);
 }
 
 .image{
