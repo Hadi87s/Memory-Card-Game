@@ -3,7 +3,7 @@
 }
 
 
-.login-form{
+/* .login-form{
     display: flex;
     justify-self: center;
     align-items: center;
@@ -17,7 +17,7 @@
     border-radius: 12px;
     backdrop-filter: blur(3px);
     box-shadow: 10px 10px 35px -5px #0a335c56;
-}
+} */
 .login-form .custom-mui-textfield,
 .login-form .custom-mui-dropdown{
     margin-bottom: 10px;

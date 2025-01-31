@@ -15,6 +15,7 @@ import { authContext } from "../providers/authProvider";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ELevels } from "../types/@types";
+import { color } from "framer-motion";
 
 const LoginScreen = () => {
   const nameField = useRef<HTMLInputElement>(null);
@@ -47,7 +48,8 @@ const LoginScreen = () => {
   return (
     <div className="login-form">
       <Container>
-        <Stack spacing={3} alignItems="center">
+       <div className="image"></div>
+        <Stack spacing={1} alignItems="center" className="custom-mui-container">
           <TextField
             inputRef={nameField}
             className="custom-mui-textfield"
@@ -55,7 +57,7 @@ const LoginScreen = () => {
             label="Player Name"
             variant="outlined"
           />
-          <FormControl fullWidth className="custom-mui-dropdown">
+          <FormControl className="custom-mui-dropdown">
             <InputLabel id="demo-simple-select-label">Level</InputLabel>
             <Select
               labelId="demo-simple-select-label"

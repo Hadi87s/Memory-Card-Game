@@ -52,3 +52,44 @@ body {
   grid-template-columns: repeat(6,1fr);
 }
 
+.login-form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 5rem;
+  border-radius: 12px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5d9ad75d;
+}
+
+.custom-mui-dropdown{
+  width: 223px;
+  
+}
+
+.custom-mui-container {
+  width: 250px;
+    background: #ffffffc4;
+    padding: 1.5rem;
+    margin: 0 auto;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.image{
+  width: 82%;
+  height: 100%;
+  position: absolute;
+  top: 7%;
+  left: 41%;
+  transform: scale(1.2) rotateZ(-15deg);
+  background-image: url(./images/gameScene.png);
+  background-repeat: no-repeat;
+  border-radius: 23px;
+  opacity: 0.5;
+}
