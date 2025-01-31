@@ -26,8 +26,8 @@ const PlayersStats = (props: IProps) => {
         <span>Time</span>
         <span>Score</span>
       </div>
-      {props.players.map((player) => (
-        <PlayerScore player={player} />
+      {props.players.map((player, index) => (
+        <PlayerScore key={player.username + index} player={player} />
       ))}
     </div>
   );

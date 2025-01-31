@@ -62,11 +62,12 @@ const GameScreen = () => {
     if (gameState.invokedCard.length === 2) {
       const [firstCard, secondCard] = gameState.invokedCard;
       dispatch({ type: "COMPARE_CARDS", payload: true });
-      dispatch({ type: "INCREMENT_TRIES" });
+      dispatch({ type: "INCREMENT_TRIES", payload: gameState.moves + 1 });
 
       if (firstCard.value === secondCard.value) {
         // Keep the cards flipped
-        dispatch({ type: "USER_SCORE" });
+        dispatch({ type: "USER_SCORE", payload: gameState.score + 1 });
+        console.log(gameState.score);
 
         if (gameState.score + 1 == MAX_SCORE) {
           dispatch({ type: "COMPLETE_PUZZLE", payload: true });
@@ -115,7 +116,7 @@ const GameScreen = () => {
       }}
     >
       <div className="screen game-screen">
-        <div // Todo: add play Again & open scoreboard buttons here, and move it into a separate component as well
+        <div
           ref={revealWin}
           className={`gameWon ${gameState.isPuzzleComplete ? "reveal" : ""}`}
         >
@@ -146,7 +147,6 @@ const GameScreen = () => {
             </Button>
             <Button
               onClick={() => {
-                dispatch({ type: "RESET_GAME" });
                 setCards(createGameBoard(CURRENT_LEVEL));
                 clearInterval(intervalID.current);
                 navigate("/score-board");

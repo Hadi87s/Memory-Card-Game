@@ -41,6 +41,10 @@ const ScoreboardScreen = () => {
     score: gameState.score,
     level: gameState.level,
   };
+  console.log(gameState);
+
+  console.log(player);
+
   const [easyList, setEasyList] = useState<playerStats[]>([]);
   const [mediumList, setMediumList] = useState<playerStats[]>([]);
   const [hardList, setHardList] = useState<playerStats[]>([]);
@@ -68,9 +72,6 @@ const ScoreboardScreen = () => {
     }
   }, []);
 
-  console.log(easyList);
-  console.log(mediumList);
-  console.log(hardList);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible

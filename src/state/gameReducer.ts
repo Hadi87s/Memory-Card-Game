@@ -22,13 +22,14 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, isPuzzleComplete: action.payload };
     }
     case "INCREMENT_TRIES": {
-      return { ...state, moves: state.moves + 1 };
+      // const newMoves = state.moves + 1;
+      return { ...state, moves: action.payload };
     }
     case "USER_LOGIN": {
       return { ...state, username: action.payload };
     }
     case "USER_SCORE": {
-      return { ...state, score: state.score + 1 };
+      return { ...state, score: action.payload };
     }
     case "SELECT_LEVEL": {
       return { ...state, level: action.payload };

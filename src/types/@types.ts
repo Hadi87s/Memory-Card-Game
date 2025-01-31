@@ -31,8 +31,8 @@ export type GameAction =
   | { type: "COMPLETE_PUZZLE"; payload: boolean }
   | { type: "USER_LOGIN"; payload: string }
   | { type: "INCREMENT_TIME"; payload: number }
-  | { type: "INCREMENT_TRIES"; payload?: number }
-  | { type: "USER_SCORE"; payload?: number }
+  | { type: "INCREMENT_TRIES"; payload: number }
+  | { type: "USER_SCORE"; payload: number }
   | { type: "SELECT_LEVEL"; payload: number }
   | { type: "RESET_GAME" };
 
