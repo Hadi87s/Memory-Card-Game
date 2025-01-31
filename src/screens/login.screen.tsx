@@ -75,8 +75,10 @@ const LoginScreen = () => {
             id="play"
             className="custom-mui-button"
             variant="contained"
+            endIcon={<PlayArrowRoundedIcon />}
+            size="large"
           >
-            Play <PlayArrowRoundedIcon />
+            Play
           </Button>
         </Stack>
       </Container>

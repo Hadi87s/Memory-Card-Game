@@ -41,8 +41,6 @@ const GameScreen = () => {
     setCards(() => updatedCards);
   };
 
-
-
   useEffect(() => {
     if (!gameState.isPuzzleComplete) {
       intervalID.current = setInterval(() => {
@@ -158,8 +156,9 @@ const GameScreen = () => {
                 clearInterval(intervalID.current);
               }}
               variant="contained"
+              endIcon={<PlayArrowRoundedIcon />}
             >
-              Play Again <PlayArrowRoundedIcon />
+              Play Again
             </Button>
             <Button
               onClick={() => {
@@ -169,8 +168,9 @@ const GameScreen = () => {
                 navigate("/");
               }}
               variant="contained"
+              endIcon={<ModeRoundedIcon />}
             >
-              Switch Mode <ModeRoundedIcon />
+              Switch Mode
             </Button>
             <Button
               onClick={() => {
@@ -179,8 +179,9 @@ const GameScreen = () => {
                 navigate("/score-board");
               }}
               variant="contained"
+              endIcon={<ScoreboardRoundedIcon />}
             >
-              ScoreBoard <ScoreboardRoundedIcon />
+              ScoreBoard
             </Button>
           </Stack>
         </div>
