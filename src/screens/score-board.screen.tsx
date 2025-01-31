@@ -4,34 +4,6 @@ import PlayersStats from "../components/board-list-card/players-stats";
 import { playerStats } from "../types/@types";
 import { motion } from "framer-motion";
 
-const player1: playerStats = {
-  username: "Ali",
-  moves: 22,
-  elapsedTime: 50,
-  score: 2,
-  level: 2,
-};
-const player2: playerStats = {
-  username: "Amr",
-  moves: 50,
-  elapsedTime: 230,
-  score: 8,
-  level: 4,
-};
-const player3: playerStats = {
-  username: "Ali Odeh",
-  moves: 67,
-  elapsedTime: 364,
-  score: 18,
-  level: 6,
-};
-const player4: playerStats = {
-  username: "Zahi",
-  moves: 67,
-  elapsedTime: 364,
-  score: 18,
-  level: 6,
-};
 const ScoreboardScreen = () => {
   const { gameState } = useContext(authContext);
   const player: playerStats = {
@@ -41,45 +13,62 @@ const ScoreboardScreen = () => {
     score: gameState.score,
     level: gameState.level,
   };
-  console.log(gameState);
-
-  console.log(player);
 
   const [easyList, setEasyList] = useState<playerStats[]>([]);
   const [mediumList, setMediumList] = useState<playerStats[]>([]);
   const [hardList, setHardList] = useState<playerStats[]>([]);
 
+  // Load data from local storage on component mount
   useEffect(() => {
-    setEasyList((prevEasyList) => [...prevEasyList, player1]);
-    setMediumList((prevMediumList) => [...prevMediumList, player2]);
-    setHardList((prevHardList) => [...prevHardList, player3]);
-    setHardList((prevHardList) => [...prevHardList, player4]);
-    switch (gameState.level) {
-      case 2: {
-        setEasyList((prevEasyList) => [...prevEasyList, player]);
-        break;
-      }
-      case 4: {
-        setMediumList((prevMediumList) => [...prevMediumList, player]);
-        break;
-      }
-      case 6: {
-        setHardList((prevHardList) => [...prevHardList, player]);
-        break;
-      }
-      default: {
-      }
-    }
+    const eList = JSON.parse(localStorage.getItem("eList") || "[]");
+    const mList = JSON.parse(localStorage.getItem("mList") || "[]");
+    const hList = JSON.parse(localStorage.getItem("hList") || "[]");
+
+    setEasyList(eList);
+    setMediumList(mList);
+    setHardList(hList);
   }, []);
+
+  // Add the current player to the appropriate list based on their level
+  useEffect(() => {
+    if (!gameState.username) return; // Skip if no player is logged in
+
+    const updateList = (list: playerStats[], player: playerStats) => {
+      // Check if the player already exists in the list
+      const playerExists = list.some((p) => p.username === player.username);
+      if (!playerExists) {
+        return [...list, player];
+      }
+      return list;
+    };
+
+    switch (gameState.level) {
+      case 2:
+        setEasyList((prev) => updateList(prev, player));
+        break;
+      case 4:
+        setMediumList((prev) => updateList(prev, player));
+        break;
+      case 6:
+        setHardList((prev) => updateList(prev, player));
+        break;
+      default:
+        break;
+    }
+  }, [gameState]);
+
+  // Save data to local storage whenever the lists change
+  useEffect(() => {
+    localStorage.setItem("eList", JSON.stringify(easyList));
+    localStorage.setItem("mList", JSON.stringify(mediumList));
+    localStorage.setItem("hList", JSON.stringify(hardList));
+  }, [easyList, mediumList, hardList]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
-      animate={{ opacity: 1, y: 0 }} // Slide up to original position
-      transition={{
-        duration: 0.4,
-        ease: "easeInOut", // Smooth easing
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <div className="scoreBoard">
         <PlayersStats level={2} players={easyList} />
