@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import ScoreboardRoundedIcon from "@mui/icons-material/ScoreboardRounded";
 import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
+import Status from "../components/board-list-card/status/status";
+import { formatTime } from "../utils/formatTime";
 const GameScreen = () => {
   const { gameState, dispatch } = useContext(authContext);
   const CURRENT_LEVEL = gameState.level || 2;
@@ -39,13 +41,7 @@ const GameScreen = () => {
     setCards(() => updatedCards);
   };
 
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const seconds = (timeInSeconds % 60).toString().padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  };
+
 
   useEffect(() => {
     if (!gameState.isPuzzleComplete) {
@@ -188,7 +184,7 @@ const GameScreen = () => {
             </Button>
           </Stack>
         </div>
-        <div className="common status">
+        {/* <div className="common status">
           <div className="username">
             <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
             {gameState.username ? gameState.username : "Unknown"}!{" "}
@@ -207,7 +203,9 @@ const GameScreen = () => {
           <div className="tries">
             <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
           </div>
-        </div>
+        </div> */}
+        <Status state={gameState} />
+
         <div className={`common game Level_${CURRENT_LEVEL}`}>
           {cards.map((card, index) => (
             <Card key={index} card={card} passEvent={handleOnClick} />
