@@ -73,3 +73,14 @@
 .reveal {
     display: flex;
 }
+
+.stats{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    width: 250px;
+    background-color: #ffffff2e;
+    backdrop-filter: blur(3px);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}

@@ -123,6 +123,37 @@ const GameScreen = () => {
           <div style={{ marginBottom: "10px", fontSize: "24px" }}>
             You've Won the Game!
           </div>
+          <div className="stats">
+            <span className="score" style={{ color: "orange" }}>
+              Score: {gameState.score}
+            </span>
+            <span
+              className="score"
+              style={{
+                color:
+                  gameState.moves < 15
+                    ? "yellow"
+                    : gameState.moves > 15 && gameState.moves < 30
+                    ? "orange"
+                    : "#ff6d6d",
+              }}
+            >
+              Moves: {gameState.moves}
+            </span>
+            <span
+              className="time"
+              style={{
+                color:
+                  gameState.elapsedTime < 50
+                    ? "yellow"
+                    : gameState.elapsedTime > 50 && gameState.elapsedTime < 100
+                    ? "orange"
+                    : "#ff6d6d",
+              }}
+            >
+              Time: {formatTime(gameState.elapsedTime)}
+            </span>
+          </div>
           <Stack spacing={2} direction="row">
             <Button
               onClick={() => {
@@ -157,7 +188,7 @@ const GameScreen = () => {
             </Button>
           </Stack>
         </div>
-        <div className="placeholder status">
+        <div className="common status">
           <div className="username">
             <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
             {gameState.username ? gameState.username : "Unknown"}!{" "}
@@ -177,7 +208,7 @@ const GameScreen = () => {
             <span style={{ color: "#1976d2" }}>Moves:</span> {gameState.moves}
           </div>
         </div>
-        <div className={`placeholder game Level_${CURRENT_LEVEL}`}>
+        <div className={`common game Level_${CURRENT_LEVEL}`}>
           {cards.map((card, index) => (
             <Card key={index} card={card} passEvent={handleOnClick} />
           ))}
