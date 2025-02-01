@@ -2,10 +2,12 @@
 
 A fun and interactive memory card game built with React, TypeScript, and Material-UI. Test your memory by matching pairs of cards while tracking your score, time, and attempts!
 
-[![Demo](https://img.shields.io/badge/demo-live-green)](https://your-demo-link.com) 
+[![Demo](https://img.shields.io/badge/demo-live-green)](https://your-demo-link.com)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-![Game Screenshot](./screenshot.png) <!-- Replace with your screenshot path -->
+![Game Screenshot](./src/images/image.png)
+![Game Screenshot](./src/images/image2.png)
+![Game Screenshot](./src/images/image3.png)
 
 ## Features ✨
 
@@ -15,7 +17,6 @@ A fun and interactive memory card game built with React, TypeScript, and Materia
 - **Score System**: Earn points for correct matches.
 - **User Authentication**: Save player names and scores.
 - **Scoreboard**: View top scores and player stats.
-- **Responsive Design**: Play on desktop or mobile.
 
 ## Technologies Used 🛠️
 
@@ -24,10 +25,3 @@ A fun and interactive memory card game built with React, TypeScript, and Materia
 - **Context API**: Global state management for user data and game state.
 - **useReducer**: Complex state logic for card interactions and timers.
 - **React Router**: Navigation between game and scoreboard pages.
-
-## Installation 🚀
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/memory-card-game.git
-   cd memory-card-game
