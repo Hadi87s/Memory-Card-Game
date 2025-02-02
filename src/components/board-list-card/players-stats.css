@@ -1,13 +1,16 @@
+.scoreBoardContainer {
+    background-Image: linear-gradient(135deg, #3a8ee8a7, #95cfea88);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
 .scoreBoard {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 88vh;
+    height: 84vh;
     gap: 20px;
-    background-Image: linear-gradient(135deg, #3a8ee8a7, #95cfea88);
-    padding: 2rem;
-    border-radius: 12px;
 }
 
 .levelCard {

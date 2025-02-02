@@ -3,7 +3,8 @@ import { authContext } from "../providers/authProvider";
 import PlayersStats from "../components/board-list-card/players-stats";
 import { playerStats } from "../types/@types";
 import { motion } from "framer-motion";
-import { Button, Typography } from "@mui/material";
+import { Button, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ScoreboardScreen = () => {
   const { gameState } = useContext(authContext);
@@ -18,7 +19,7 @@ const ScoreboardScreen = () => {
   const [easyList, setEasyList] = useState<playerStats[]>([]);
   const [mediumList, setMediumList] = useState<playerStats[]>([]);
   const [hardList, setHardList] = useState<playerStats[]>([]);
-
+  const navigate = useNavigate();
   // Load data from local storage on component mount
   useEffect(() => {
     const eList = JSON.parse(localStorage.getItem("eList") || "[]");
@@ -71,10 +72,22 @@ const ScoreboardScreen = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
-      <div className="scoreBoard">
-        <PlayersStats level={2} players={easyList} />
-        <PlayersStats level={4} players={mediumList} />
-        <PlayersStats level={6} players={hardList} />
+      <div className="scoreBoardContainer">
+        <div className="scoreBoard">
+          <PlayersStats level={2} players={easyList} />
+          <PlayersStats level={4} players={mediumList} />
+          <PlayersStats level={6} players={hardList} />
+        </div>
+        <Stack alignItems={"center"}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Play Again
+          </Button>
+        </Stack>
       </div>
     </motion.div>
   );
