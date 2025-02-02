@@ -9,7 +9,7 @@ const Status = (props: IProps) => {
   return (
     <div className="common status">
       <div className="username">
-        <span style={{ color: "#1976d2" }}>Welcome </span>{" "}
+        <span style={{ color: "#1976d2" }}>Welcome </span>
         {props.state.username ? props.state.username : "Unknown"}!{" "}
       </div>
       <div className="score">
@@ -18,7 +18,7 @@ const Status = (props: IProps) => {
       <div className="elapsed-time">
         <span style={{ color: "#1976d2" }}>Time Spent: </span>{" "}
         <span
-          style={{ color: props.state.isPuzzleComplete ? "green" : "#f1f1f1" }}
+          style={{ color: props.state.isPuzzleComplete ? "green" : "#0e0e0e" }}
         >
           {formatTime(props.state.elapsedTime)}
         </span>
