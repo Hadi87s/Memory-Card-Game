@@ -49,10 +49,6 @@ const LoginScreen = () => {
   return (
     <div className="login-form">
       <Container>
-        <div className="image"></div>
-        <Typography variant="h1" align="center" className="gameTitle">
-          Memory Game
-        </Typography>
         <motion.div
           initial={{ opacity: 0, y: 20 }} // Start 20px below, invisible
           animate={{ opacity: 1, y: 0 }} // Slide up to original position
@@ -67,6 +63,16 @@ const LoginScreen = () => {
             alignItems="center"
             className="custom-mui-container"
           >
+            <Typography
+              variant="h4"
+              style={{
+                fontFamily: "Fredoka",
+                fontWeight: "500",
+              }}
+              className="gameTitle"
+            >
+              User Login
+            </Typography>
             <TextField
               inputRef={nameField}
               className="custom-mui-textfield"
